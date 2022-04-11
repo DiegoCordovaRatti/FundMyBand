@@ -9,6 +9,9 @@ export default new Vuex.Store({
       {
         title: 'CorVje',
         view: 'corvje',
+        dialog: false,
+        valid: true,
+        checkbox: false,
         imgSrc: 'https://pbs.twimg.com/profile_banners/3126603132/1567571070/1500x500',
         bannerSrc: 'https://rocklegacy.cl/wp-content/uploads/2021/06/unnamed1.jpg',
         text: 'Somos una banda de Chile, intentamos subirnos el animo con nuestras canciones ojalá podamos con el tuyo.',
@@ -71,6 +74,9 @@ export default new Vuex.Store({
       {
         title: 'Peor es Nada',
         view: 'peor_es_nada',
+        dialog: false,
+        valid: true,
+        checkbox: false,
         imgSrc: 'https://scontent-scl2-1.xx.fbcdn.net/v/t31.18172-8/15800033_10154893306144583_6095294185487889541_o.jpg?_nc_cat=105&ccb=1-5&_nc_sid=e3f864&_nc_eui2=AeFdMTOR9QR2UWMLYl9r85yIDtpRNZC33hUO2lE1kLfeFYrE5HZRPqBv3W9dlSfugGs&_nc_ohc=aSpL84_J5UAAX9E6k1A&_nc_ht=scontent-scl2-1.xx&oh=00_AT-2PaIBfJBej7r6Ds8BdWEMA-3j572BYINy0pt-Cf-2iA&oe=62724046',
         bannerSrc: 'https://scontent-scl2-1.xx.fbcdn.net/v/t1.6435-9/122090749_183815776639098_336435718893168364_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeH5EMb94RE-XUXk2ejGXVZP7KRTqSqRisTspFOpKpGKxHQpjhWPKf5pqj9uSjtIM_g&_nc_ohc=RFJjul4VZNAAX8JGmBi&_nc_ht=scontent-scl2-1.xx&oh=00_AT_NrKhyAlRIaqMaOZNX19X1sNLtIFUeknOvoBjRK0eJsg&oe=627757D4',
         text: 'Banda chilena mítica y mística. Escúchanos en Spotify.',
@@ -150,6 +156,9 @@ export default new Vuex.Store({
       {
         title: 'Sin Instrumento Alguno',
         view: 'sin_instrumento_alguno',
+        dialog: false,
+        valid: true,
+        checkbox: false,
         imgSrc: 'https://scontent-scl2-1.xx.fbcdn.net/v/t1.6435-9/94568073_10158229501303428_1300078281147547648_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=e3f864&_nc_eui2=AeHOWt0KLvauebNB0gJ_lqvSYl6p_J8z_rZiXqn8nzP-tlVuhOUn0UBKwVhY2BH7eZg&_nc_ohc=fRicI1fOOWQAX9s2zWm&_nc_ht=scontent-scl2-1.xx&oh=00_AT99qSS8z92w5hmPKmb4gqI1AwCCL6m03LCXXpGBhVzhEA&oe=6272B991',
         bannerSrc: 'https://i.ytimg.com/vi/bgdTv8pvtCM/maxresdefault.jpg',
         text: 'Sin Instrumento Alguno (S.I.A. para los amig@s). Banda con cinco discos',
@@ -229,6 +238,15 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
+    MODIFY_BAND(state, modifiedBand){
+      let originalBand = state.bandas
+      originalBand.title = modifiedBand.title
+      originalBand.imgSrc = modifiedBand.imgSrc
+      originalBand.bannerSrc = modifiedBand.bannerSrc
+      originalBand.text = modifiedBand.text
+      originalBand.description = modifiedBand.description
+      originalBand.spotifyUrl = modifiedBand.spotifyUrl
+    }
   },
   actions: {
   },

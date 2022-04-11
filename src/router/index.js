@@ -6,6 +6,7 @@ const Banda = () => import('../views/Banda.vue')
 const Usuario = () => import('../views/Usuario.vue')
 const SignUp = () => import('../views/SignUp.vue')
 const SignIn = () => import('../views/SignIn.vue')
+const Administrar = () => import('../views/Administrar.vue')
 
 
 Vue.use(VueRouter)
@@ -41,6 +42,12 @@ const routes = [
     name: 'SignIn',
     component: SignIn
   },
+  {
+    path: '/administrar',
+    name: 'Administrar',
+    component: Administrar,
+  },
+
 
 ]
 

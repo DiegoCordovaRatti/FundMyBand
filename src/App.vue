@@ -84,6 +84,7 @@
         {icon:"mdi-account", text: "Mi cuenta", view: "/mi-cuenta/diego",},
         {icon:"mdi-account-plus", text: "Regístrate", view: "/sign-up",},
         {icon:"mdi-account-key", text: "Ingresa", view: "/sign-in",},
+        {icon:"mdi-account-key", text: "Administrar", view: "/administrar",},
       ],
       icons: [
         'mdi-facebook',
