@@ -10,7 +10,7 @@
                 <v-card-title v-text="card.title"></v-card-title>
               </v-img>
   
-              <v-card-text class="text--primary">
+              <v-card-text>
                 <div>{{card.text}}</div>
               </v-card-text>
             </v-card>
@@ -29,23 +29,28 @@
 </template>
 
 <script>
+// import auth from '../firebase/authentification'
 import userCollection from '../firebase/firestore'
-import {doc, updateDoc, arrayUnion, arrayRemove, //arrayRemove
+import {doc, updateDoc, arrayUnion, arrayRemove, //getDocs
 } from 'firebase/firestore'
   export default {
     data: () => ({
       cards: null,
+      currentUser: null,
     }),
     methods: {
       async addLike(card){
-        const likesRef = doc(userCollection, this.$store.state.currentUserID)
+        let currentUserID = this.$store.state.currentUserID
+        const likesRef = doc(userCollection, currentUserID)
         await updateDoc(likesRef,{
           likes: arrayUnion(card)
         })
+
       },
       async removeLike(card){
         //aun no funciona. Asignar un constructor de clases para eleminar los objetos de la base de datos(?)
-        const likesRef = doc(userCollection, this.$store.state.currentUserID)
+        let currentUserID = this.$store.state.currentUserID
+        const likesRef = doc(userCollection, currentUserID)
         await updateDoc(likesRef,{
           likes: arrayRemove(card)
         })
@@ -59,6 +64,16 @@ import {doc, updateDoc, arrayUnion, arrayRemove, //arrayRemove
     created() {
       this.cards = this.getBandas
     },
+    // async mounted() {
+    //   let currentUserData = null
+    //   const querySnapshot = await getDocs(userCollection)
+    //   querySnapshot.docs.forEach(doc => {
+    //     if (doc.id == auth.currentUser.uid) {
+    //       currentUserData = doc.data()
+    //     }
+    //   });
+    //   this.currentUser = currentUserData
+    // },
   }
 </script>
 <style>

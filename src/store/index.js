@@ -247,6 +247,325 @@ export default new Vuex.Store({
           },
         ],
       },
+      {
+        title: 'Niños Del Cerro',
+        index: 3,
+        view: 'niños-del-cerro',
+        likes: false,
+        dialog: false,
+        valid: true,
+        checkbox: false,
+        imgSrc: 'https://radio.uchile.cl/wp-content/uploads/2020/03/ndc.jpg',
+        bannerSrc: 'https://www.cultura.gob.cl/wp-content/uploads/2018/08/ninos-del-cerro-verano-fotos-x-milabelen-5.jpg',
+        text: 'En 2016, Niños del Cerro recibieron el reconocimiento como Artista Revelación en la ceremonia de los Premios Pulsar',
+        description: 'Considerados puntas de lanza de la nueva generación que vino a devolver el protagonismo a las guitarras dentro de la música chilena, Niños del Cerro se convirtió rápidamente en un nombre reconocible dentro de la activa escena independiente de su país.',
+        spotifyUrl:'https://open.spotify.com/embed/album/5RCDf0SXVDDFh05ENL68JU?utm_source=generator&theme=0',
+        bandMembers:[
+          {
+            photo: 'https://indiehoy.com/wp-content/uploads/2019/10/simon-campusano.jpg',
+            name: 'Simón Campusano',
+            role: 'guitarra y voz',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'https://www.instagram.com/elsim4o/',
+                color: 'purple',
+              },
+            ]
+          },
+          {
+            photo: '',
+            name: 'Ignacio Castillo',
+            role: 'guitarra',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+          {
+            photo: '',
+            name: 'José Mazurett',
+            role: 'batería',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+          {
+            photo: '',
+            name: 'Felipe Villarubia',
+            role: 'bajo',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+          {
+            photo: '',
+            name: 'Diego Antiman',
+            role: 'teclados',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+        ],
+      },
+      {
+        title: 'Ágata Prisma',
+        index: 4,
+        view: 'agata-prisma',
+        likes: false,
+        dialog: false,
+        valid: true,
+        checkbox: false,
+        imgSrc: 'https://www.inmortal.cl/site/wp-content/uploads/2022/02/unnamed7-1.jpg',
+        bannerSrc: 'https://1.bp.blogspot.com/-bdf09frcih4/YaV2ZRRjERI/AAAAAAAAHxc/-s-qkCycoD4Ryt2sLp_KVC_J3IxtE73LACNcBGAsYHQ/s1824/agata-prisma-olvidarte-es-un-arte.webp',
+        text: 'Ágata Prisma is the musical project of Daniela Guzmán Bertini, a Chilean artist',
+        description: 'In Ágata Prisma, Daniela Guzmán investigates various genres, through the intuitive sound of musical instruments and lyrics ranging from cats to tarot. Among her influences are trip hop, electronic, electropop, dream pop, indie, bossa nova and funk.',
+        spotifyUrl:'https://open.spotify.com/embed/album/3XWcjhCcNd4zVeKCL6MwNm?utm_source=generator&theme=0',
+        bandMembers:[
+          {
+            photo: 'https://d1fdloi71mui9q.cloudfront.net/FXWJvuhuSpGPnnOyNPRB_3059Tsyod2PMgraD',
+            name: 'Daniela Guzmán Bertini',
+            role: 'Voz',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+        ],
+      },
+      {
+        title: 'Yorka',
+        index: 5,
+        view: 'yorka',
+        likes: false,
+        dialog: false,
+        valid: true,
+        checkbox: false,
+        imgSrc: 'https://www.latercera.com/resizer/kTASBtaiT-BARPuImro4nDePzo0=/900x600/smart/cloudfront-us-east-1.images.arcpublishing.com/copesa/37W56EU54NBONA3QTPRUU7HVPM.jpeg',
+        bannerSrc: 'https://www.yorka.cl/wp-content/uploads/2020/03/Yorkanov18.jpg',
+        text: 'Yorka es un dúo de pop chileno conformado por las hermanas Yorka y Daniela Pastenes, quiénes han logrado un espacio en la escena independiente chilena con tres discos editados',
+        description: 'Un pop orgánico basado en el formato banda que destaca por guitarras y la mezcla de voces que hacen de sus canciones un pop meloso y sincero. Compartiendo escenario con Francisca Valenzuela, Alex Anwandter, Camila Moreno, Anita Tijoux, Pedropiedra, entre otros.',
+        spotifyUrl:'https://open.spotify.com/embed/album/2aVf2kvguncX8TGNEIIwxB?utm_source=generator&theme=0',
+        bandMembers:[
+          {
+            photo: '',
+            name: 'Yorka Pastenes',
+            role: 'Composición, guitarra y voz ',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+          {
+            photo: '',
+            name: 'Daniela Pastenes',
+            role: 'Percusiones, ukelele y voz',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+          {
+            photo: '',
+            name: 'Pablo Jara',
+            role: 'Guitarra',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+          {
+            photo: '',
+            name: 'Pancho Ugarte',
+            role: 'Bajo',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+          {
+            photo: '',
+            name: 'Matías Petersen',
+            role: 'batería ',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+        ],
+      },
+      {
+        title: 'Nicole Bunout',
+        index: 6,
+        view: 'nicole-bunout',
+        likes: false,
+        dialog: false,
+        valid: true,
+        checkbox: false,
+        imgSrc: 'https://gam.cl/media/photologue/photos/_MG_9948.jpg.1200x900_q85.jpg',
+        bannerSrc: 'https://coolmusicchile.cl/wp-content/uploads/2019/04/Nicole-Bunout1.jpg',
+        text: 'Nicole Bunout es una de la voces más finas de la escena musical chilena. ',
+        description: 'Su mezcla de exquisita técnica, dulzura y poesía, generan una alquimia que hacen sentir al jazz y la música popular como un solo elemento en el que las fronteras se derriten ante el bálsamo de su voz. Nicole es un cántaro que se rebalsa, es un derrame de emociones en el que difícilmente se logra salir intacto. Ha realizado múltiples colaboraciones con diversos artistas, tanto en el mundo del jazz como en la música popular. Entre ellos se encuentran: Isabel Parra, Nano Stern, Orquesta del Viento, Daniel Lencina (cantante y trompetista), Christian Gálvez (bajista), Mauricio Rodríguez (guitarrista de La Marraqueta), Federico Dannemann (ex guitarrista de Pedro Aznar y La Rue Morgue), Banda Cultrera, Espinoza & Compañía, entre otros.',
+        spotifyUrl:'https://open.spotify.com/embed/album/76XYjBKZrBuAj50Vyxpiur?utm_source=generator&theme=0',
+        bandMembers:[
+          {
+            photo: 'https://gam.cl/media/photologue/photos/foto_nicole.JPG.1200x900_q85.jpg',
+            name: 'Nicole Bunout ',
+            role: 'Voz Guitarra',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+          {
+            photo: '',
+            name: 'Fernando Rain ',
+            role: '',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'https://www.instagram.com/nicolebunout',
+                color: 'purple',
+              },
+            ]
+          },
+          {
+            photo: '',
+            name: 'Sebastián González ',
+            role: '',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+          {
+            photo: '',
+            name: 'Ramiro Durán',
+            role: '',
+            socialMedia:[
+              {
+                icon:'mdi-facebook',
+                link:'#',
+                color: 'blue',
+              },
+              {
+                icon:'mdi-instagram',
+                link:'#',
+                color: 'purple',
+              },
+            ]
+          },
+        ],
+      },
     ]
   },
   mutations: {

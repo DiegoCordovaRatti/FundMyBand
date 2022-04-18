@@ -145,7 +145,6 @@ export default {
         querySnapshot.docs.forEach(doc => {
             if (doc.id == auth.currentUser.uid) {
                 currentUserData = doc.data()
-                console.log(currentUserData)
             }else{
                 otherUsersData.push(doc.data())
             }
