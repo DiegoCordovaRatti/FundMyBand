@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import auth from '../firebase/authentification'
 const Home = () => import('../views/Home.vue')
 const ListaBandas = () => import('../views/ListaBandas.vue')
 const Banda = () => import('../views/Banda.vue')
 const Usuario = () => import('../views/Usuario.vue')
-const SignUp = () => import('../views/SignUp.vue')
-const SignIn = () => import('../views/SignIn.vue')
+const Ingresa = () => import('../views/Ingresa.vue')
 const Administrar = () => import('../views/Administrar.vue')
 
 
@@ -15,37 +15,47 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta:{
+      guardRoutes: true,
+    }
   },
   {
     path: '/lista-bandas',
     name: 'ListaBandas',
-    component: ListaBandas
+    component: ListaBandas,
+    meta:{
+      guardRoutes: true,
+    }
   },
   {
     path: '/banda/:id/:thisbanda',
     name: 'Banda',
-    component: Banda
+    component: Banda,
+    meta:{
+      guardRoutes: true,
+    }
   },
   {
     path: '/mi-cuenta/:usuario',
     name: 'Usuario',
-    component: Usuario
+    component: Usuario,
+    meta:{
+      guardRoutes: true,
+    }
   },
   {
-    path: '/sign-up',
-    name: 'SignUp',
-    component: SignUp
-  },
-  {
-    path: '/sign-in',
-    name: 'SignIn',
-    component: SignIn
+    path: '/ingresa',
+    name: 'Ingresa',
+    component: Ingresa
   },
   {
     path: '/administrar',
     name: 'Administrar',
     component: Administrar,
+    meta:{
+      guardRoutes: true,
+    }
   },
 
 
@@ -56,5 +66,17 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  let email = auth.currentUser;
+  let authRequired = to.matched.some((route) => route.meta.guardRoutes);
+  if (!email && authRequired) {
+    next("/ingresa");
+  } else if (email && !authRequired) {
+    next("/");
+  } else {
+    next();
+  }
+});
 
 export default router

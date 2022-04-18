@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home mt-md-15">
     <div>
       <carousel></carousel>
     </div>
@@ -11,7 +11,6 @@
 
 <script>
 import Cards from '../components/Cards.vue'
-// @ is an alias to /src
 import Carousel from '../components/Carousel.vue'
 export default {
   name: 'Home',

@@ -1,7 +1,7 @@
 <template lang="">
     <div>
         {{dialogs}}
-        <v-container class="d-flex align-center" style="min-height: 100vh;">
+        <v-container class="d-flex align-center" style="min-height: 80vh;">
             <v-card class="mx-auto" tile>
                 <v-list shaped>
                     <v-card-title>Administrar Bandas</v-card-title>

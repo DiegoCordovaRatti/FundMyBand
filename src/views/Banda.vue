@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <v-container fluid style="padding: 0">
+        <v-container class="mt-md-15" fluid style="padding: 0">
             <v-row class="mb-5">
                 <v-img :src="band.bannerSrc" aspect-ratio="2.5" fluid></v-img>
             </v-row>
@@ -22,10 +22,10 @@
                     </v-row>
                 </div>
             </v-row>
-            <v-row class="my-5 justify-center">
+            <v-row class="my-5 justify-center flex-column text-center">
                 <h2 class="my-5">Conoce a <span>{{band.title}}</span></h2>
                 <v-item-group class="px-5">
-                    <v-row >
+                    <v-row class="justify-center">
                         <v-col v-for="(bandMember, i) in bandMembers" :key="i" class="col-sm col-md-6 col-lg-4">
                             <v-card >
                                 <v-img height="300px" :src="bandMember.photo"></v-img>

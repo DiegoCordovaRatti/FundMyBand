@@ -1,14 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+// import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  // plugins: [createPersistedState()],
   state: {
+    signedIn: false,
+    usersData: null,
+    currentUserData: null,
+    currentUserID: null,
     bandas:[
       {
         title: 'CorVje',
+        index: 0,
         view: 'corvje',
+        likes: false,
         dialog: false,
         valid: true,
         checkbox: false,
@@ -73,7 +81,9 @@ export default new Vuex.Store({
       },
       {
         title: 'Peor es Nada',
+        index: 1,
         view: 'peor_es_nada',
+        likes: false,
         dialog: false,
         valid: true,
         checkbox: false,
@@ -155,7 +165,9 @@ export default new Vuex.Store({
       },
       {
         title: 'Sin Instrumento Alguno',
+        index: 2,
         view: 'sin_instrumento_alguno',
+        likes: false,
         dialog: false,
         valid: true,
         checkbox: false,
@@ -238,14 +250,23 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
-    MODIFY_BAND(state, modifiedBand){
+    MODIFY_BAND(state, payload){
       let originalBand = state.bandas
-      originalBand.title = modifiedBand.title
-      originalBand.imgSrc = modifiedBand.imgSrc
-      originalBand.bannerSrc = modifiedBand.bannerSrc
-      originalBand.text = modifiedBand.text
-      originalBand.description = modifiedBand.description
-      originalBand.spotifyUrl = modifiedBand.spotifyUrl
+      originalBand.title = payload.title
+      originalBand.imgSrc = payload.imgSrc
+      originalBand.bannerSrc = payload.bannerSrc
+      originalBand.text = payload.text
+      originalBand.description = payload.description
+      originalBand.spotifyUrl = payload.spotifyUrl
+    },
+    SIGNED_IN(state, payload){
+      state.signedIn = payload.signedIn
+      state.currentUserID = payload.currentUserID
+      state.currentUserData = payload.currentUserData
+      state.usersData = payload.usersData
+    },
+    SIGN_OUT(state, payload){
+      state.signedIn = payload
     }
   },
   actions: {
