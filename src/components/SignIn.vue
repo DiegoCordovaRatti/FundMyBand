@@ -1,33 +1,37 @@
 <template>
     <div id="signIn">
-        <v-container >
-
-            <v-card class="d-flex align-center" style="min-height: 80vh;">
-                <v-form class="px-5" ref="form" v-model="valid" lazy-validation style="width: 100%">
-    
-                    <v-text-field v-model="email" :rules="rules.emailRules" label="E-mail" required></v-text-field>
-    
-                    <v-text-field v-model="password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                        :rules="[rules.required, rules.min]" :type="showPassword ? 'text' : 'password'" name="input-10-1"
-                        label="Contraseña" hint="Tu contraseña debe tener 8 caracteres" counter
-                        @click:append="showPassword = !showPassword">
-                    </v-text-field>
-    
-                    <v-btn :disabled="!valid" color="success" class="mr-4" @click="signIn">
-                        Ingresar
-                    </v-btn>
-    
-                    <v-btn color="error" class="mr-4" @click="reset">
-                        Borrar campos
-                    </v-btn>
-    
-                </v-form>
-            </v-card>
+        <v-container>
+            <v-row>
+                <v-col class="d-flex align-center justify-center" style="min-height: 80vh;">
+                    <v-card class="d-flex align-center" style="height: 50%; width: 100%">
+                        <v-form class="px-5" ref="form" v-model="valid" lazy-validation style="width: 100%">
+                            <v-text-field v-model="email" :rules="rules.emailRules" label="E-mail" required>
+                            </v-text-field>
+                            <v-text-field v-model="password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                                :rules="[rules.required, rules.min]" :type="showPassword ? 'text' : 'password'"
+                                name="input-10-1" label="Contraseña" hint="Tu contraseña debe tener 8 caracteres"
+                                counter @click:append="showPassword = !showPassword">
+                            </v-text-field>
+                            <v-row>
+                                <v-btn :disabled="!valid" color="success" class="mr-4" @click="signIn" small>
+                                    Ingresar
+                                </v-btn>
+                                <v-btn color="error" class="mr-4" @click="reset" small>
+                                    Borrar campos
+                                </v-btn>
+                            </v-row>
+                        </v-form>
+                    </v-card>
+                </v-col>
+                <v-col class="d-flex justify-center align-center col-sm col-md-6">
+                    <v-img class="col-sm col-md-10 rounded-xl rounded-tr-0"
+                        src="https://i.pinimg.com/736x/a8/dc/73/a8dc73e1ee72fb62202bbb552b985f35.jpg"></v-img>
+                </v-col>
+            </v-row>
         </v-container>
         <v-snackbar v-model="snackbar">
             Bienvenido, {{email}}
         </v-snackbar>
-
     </div>
 </template>
 

@@ -1,62 +1,78 @@
 <template>
     <div id="signUp">
-        <v-container>
-            <v-card class="d-flex align-center" style="min-height: 80vh;">
+        <v-container style="min-height: 80vh;">
+            <v-row class="d-flex flex-row-reverse">
+                <v-col class="col-sm col-md-6 d-flex justify-center align-center">
+                    <v-card class="d-flex align-center" style="width:100%">
+                        <v-form class="pa-5" ref="form" v-model="valid" lazy-validation style="width: 100%">
+                            <v-row>
+                                <v-col cols="12" sm="6">
+                                    <v-text-field v-model="firstName" :rules="rules.name" color="purple darken-2"
+                                        label="Nombre" required></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6">
+                                    <v-text-field v-model="lastName" :rules="rules.name" color="blue darken-2"
+                                        label="Apellidos" required>
+                                    </v-text-field>
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col cols="12" sm="6">
+                                    <v-text-field v-model="userName" :rules="rules.name" color="purple darken-2"
+                                        label="Nombre de Usuario" required></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6">
+                                    <v-slider v-model="age" :rules="rules.age" color="orange" label="Edad"
+                                        hint="Desliza para indicar tu edad" min="0" max="100" thumb-label required>
+                                    </v-slider>
+                                </v-col>
+                            </v-row>
 
-        <v-form class="px-5" ref="form" v-model="valid" lazy-validation style="width: 100%">
+                            <v-row align="center">
+                                    <v-select v-model="banner" :items="items" label="Elige un banner para tu cuenta" :rules="[(v) => !!v || 'Debes elegir un banner']" required>
+                                        <template v-slot:selection="{ item }">
+                                            {{ item.name }}) <v-spacer></v-spacer><img :src="item.image" width="150" class="my-2">
+                                        </template>
+                                        <template v-slot:item="{ item }">
+                                            {{ item.name }}) <v-spacer></v-spacer><img :src="item.image" width="150" class="my-2">
+                                        </template>
+                                    </v-select>
+                            </v-row>
 
-            <v-row>
-                <v-col cols="12" sm="6">
-                    <v-text-field v-model="firstName" :rules="rules.name" color="purple darken-2" label="Nombre"
-                        required></v-text-field>
+                            <v-row>
+                                <v-text-field v-model="email" :rules="rules.emailRules" label="E-mail" required>
+                                </v-text-field>
+                            </v-row>
+                            <v-row>
+                                <v-text-field v-model="password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                                    :rules="[rules.required, rules.min]" :type="showPassword ? 'text' : 'password'"
+                                    name="input-10-1" label="Contraseña" hint="Tu contraseña debe tener 8 caracteres"
+                                    counter @click:append="showPassword = !showPassword">
+                                </v-text-field>
+                            </v-row>
+                            <v-row class="py-5">
+                                <v-btn :disabled="!valid" color="success" class="mr-4" @click="signUp" small>
+                                    Registrar
+                                </v-btn>
+                                <v-btn color="error" class="mr-4" @click="reset" small>
+                                    Borrar campos
+                                </v-btn>
+                            </v-row>
+                        </v-form>
+                        <!-- register -->
+                    </v-card>
                 </v-col>
-                <v-col cols="12" sm="6">
-                    <v-text-field v-model="lastName" :rules="rules.name" color="blue darken-2" label="Apellidos" required>
-                    </v-text-field>
+                <v-col class="d-flex justify-center align-center col-sm col-md-6">
+                    <v-img class="col-sm col-md-10 rounded-xl rounded-l-0" style="height: 80%"
+                        src="https://m.media-amazon.com/images/I/61KMmAv+WhL._AC_SL1001_.jpg"></v-img>
                 </v-col>
             </v-row>
-            <v-row>
-                <v-col cols="12" sm="6">
-                    <v-text-field v-model="userName" :rules="rules.name" color="purple darken-2" label="Nombre de Usuario"
-                        required></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6">
-                <v-slider v-model="age" :rules="rules.age" color="orange" label="Edad" hint="Desliza para indicar tu edad" min="0"
-                    max="100" thumb-label required></v-slider>
-                </v-col>
-            </v-row>
+        </v-container>
+        <v-snackbar v-model="snackbar">
+            Su cuenta ha sido creada exitosamente, {{userName}}
+        </v-snackbar>
 
-            <v-row>
-            </v-row>
-
-            <v-row><v-text-field v-model="email" :rules="rules.emailRules" label="E-mail" required></v-text-field></v-row>
-
-            <v-row>
-                <v-text-field v-model="password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                    :rules="[rules.required, rules.min]" :type="showPassword ? 'text' : 'password'" name="input-10-1"
-                    label="Contraseña" hint="Tu contraseña debe tener 8 caracteres" counter @click:append="showPassword = !showPassword">
-                </v-text-field>
-                </v-row>
-
-                <v-row>
-                    <v-btn :disabled="!valid" color="success" class="mr-4" @click="signUp">
-                        Registrar
-                    </v-btn>
-
-                    <v-btn color="error" class="mr-4" @click="reset">
-                        Borrar campos
-                    </v-btn>
-                </v-row>
-
-                </v-form>
-                <!-- register -->
-            </v-card>
-                </v-container>
-                <v-snackbar v-model="snackbar">
-                    Su cuenta ha sido creada exitosamente, {{userName}}
-                </v-snackbar>
-
-    </div>
+        </div>
 </template>
 
 <script>
@@ -68,6 +84,8 @@ import userCollection from '../firebase/firestore'
     export default {
         data: () => ({
             valid: true,
+            dialog: false,
+            items:[],
             payload: {
                 signedIn: true,
                 currentUserID: null,
@@ -81,7 +99,7 @@ import userCollection from '../firebase/firestore'
             age: '',
             email: '',
             password: '',
-            avatar: '',
+            banner: null,
             showPassword: false,
             rules: {
                 required: value => !!value || 'Esta area es requerida.',
@@ -113,6 +131,7 @@ import userCollection from '../firebase/firestore'
                     password: this.password,
                     uid: this.payload.currentUserID,
                     show: false,
+                    banner: this.banner.image,
                     likes: [],
                 })
                 this.snackbar = true
@@ -131,6 +150,16 @@ import userCollection from '../firebase/firestore'
                 this.$store.commit('SIGNED_IN', this.payload)
             }
         },
+        created(){
+            fetch('https://picsum.photos/v2/list?page=1&limit=50')
+                    .then(response => response.json())
+                    .then(response => {
+                        response.forEach((r, index) =>{
+                            this.items.push({name: index+1, image: r.download_url})
+                        })
+                    })
+                    .catch(err => console.error(err));
+        }
         // schmoe 0 - 26
     }
 </script>
