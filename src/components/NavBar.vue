@@ -150,7 +150,7 @@ export default {
           let signedIn = false
           this.snackbar = true
           let pushRoute = () => {
-            this.$router.push("/ingresa")
+            this.$router.go()
           }
           setTimeout(pushRoute, 500)
           this.$store.commit('SIGNED_IN', signedIn)

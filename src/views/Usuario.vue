@@ -3,7 +3,7 @@
         <v-container class="d-flex flex-column justify-center align-center" style="min-height: 100vh">
             <v-row class="d-flex justify-center align-center mb-15" style="margin-top: 10vh; width: 100%">
                 <v-card style="height: 100%">
-                    <v-img class="d-flex align-end" height="250" :src="newBanner">
+                    <v-img class="d-flex align-end" height="450" :src="newBanner">
                         <v-row>
                             <v-col>
                                 <v-avatar color="red">
@@ -98,36 +98,40 @@
                             <v-btn-toggle v-model="toggle_multiple" dense background-color="primary" dark multiple>
                                 <v-btn color="primary" dark @click.stop="dialog = true">Me gusta
                                 </v-btn>
-                                <v-dialog v-model="dialog" style="width: 100vw">
-                                    <v-card>
-                                        <v-card-title class="text-h5">Bandas que te gustan
-                                        </v-card-title>
-                                        <v-card class="mx-auto col-sm col-md-6 my-5"
-                                            v-for="(likedBand, i) in currentUser.likes" :key="i" outlined>
-                                            <v-list-item three-line>
-                                                <v-list-item-content>
-                                                    <v-list-item-title class="text-sm-h5 text-md-h4 text-lg-h3">
-                                                        {{ likedBand.title }}
-                                                    </v-list-item-title>
-                                                </v-list-item-content>
-                                                <v-list-item-avatar tile size="100">
-                                                    <v-img :src="likedBand.imgSrc"></v-img>
-                                                </v-list-item-avatar>
-                                            </v-list-item>
+                                <v-dialog  v-model="dialog" >
+                                    <div class="d-flex justify-center">
+                                        <v-card style="width: 70vw">
+                                            <v-card-title class="text-h5">Bandas que te gustan
+                                            </v-card-title>
+                                            <v-row class="d-flex justify-center">
+                                                <v-card class="mx-1 col-sm col-md-5 my-5 band-card"
+                                                    v-for="(likedBand, i) in currentUser.likes" :key="i" outlined>
+                                                    <v-list-item three-line>
+                                                        <v-list-item-content>
+                                                            <v-list-item-title class="text-sm-h5 text-md-h4 text-lg-h3">
+                                                                {{ likedBand.title }}
+                                                            </v-list-item-title>
+                                                        </v-list-item-content>
+                                                        <v-list-item-avatar tile size="100">
+                                                            <v-img :src="likedBand.imgSrc"></v-img>
+                                                        </v-list-item-avatar>
+                                                    </v-list-item>
+                                                    <v-card-actions>
+                                                        <v-btn :to="`/banda/${likedBand.index}/${likedBand.view}`"
+                                                            color="success" outline rounded text>
+                                                            Ir a la página de la banda
+                                                        </v-btn>
+                                                    </v-card-actions>
+                                                </v-card>
+                                            </v-row>
+                                            <v-spacer></v-spacer>
                                             <v-card-actions>
-                                                <v-btn :to="`/banda/${likedBand.index}/${likedBand.view}`"
-                                                    color="success" outline rounded text>
-                                                    Ir a la página de la banda
+                                                <v-btn color="green darken-1" text @click="dialog = false">
+                                                    Cerrar
                                                 </v-btn>
                                             </v-card-actions>
                                         </v-card>
-                                        <v-spacer></v-spacer>
-                                        <v-card-actions>
-                                            <v-btn color="green darken-1" text @click="dialog = false">
-                                                Close
-                                            </v-btn>
-                                        </v-card-actions>
-                                    </v-card>
+                                    </div>
                                 </v-dialog>
                             </v-btn-toggle>
                         </v-row>
@@ -139,9 +143,9 @@
                 <v-row class="my-5">
                     <v-col class="col-sm col-md-4" v-for="(otherUser, i) in otherUsersData" :key="i">
                         <v-card class="mx-auto" width="300">
-                            <v-img :src="otherUser.banner" height="100" cover>
-                                <v-card-title>
-                                    {{ otherUser.userName }}
+                            <v-img class="d-flex align-end" :src="otherUser.banner" height="100" cover>
+                                <v-card-title dark>
+                                    <strong>{{ otherUser.userName }}</strong>
                                 </v-card-title>
                             </v-img>
                             <v-card-actions>
@@ -283,5 +287,9 @@ export default {
         cursor: pointer;
         filter: brightness(1);
         transform: scale(1.1);
+    }
+    .band-card{
+        border: 0.5px solid rgb(145, 138, 138);
+        border-radius: 8px;
     }
 </style>

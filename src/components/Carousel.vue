@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-carousel style="width: 100vw">
+        <v-carousel cycle style="width: 100vw;">
             <v-carousel-item :to="item.view" v-for="(item, i) in items" :key="i" :src="item.src">
                 <v-sheet color="transparent" height="100%" tile>
                     <v-row class="fill-height flex-column text-center mx-5" align="center" justify="center">

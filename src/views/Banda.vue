@@ -4,8 +4,8 @@
             <v-row class="mb-5">
                 <v-img class="d-flex align-end" :src="band.bannerSrc" aspect-ratio="2.5" fluid>
                     <div class="ma-8 d-flex align-center" fluid>
-                        <v-icon style="color: #e31b23">mdi-robot-love</v-icon>
-                        <span class="ms-3" style="color:white">{{ likesQuantity }} Likes</span>
+                        <v-icon style="color: #e31b23" x-large>mdi-robot-love</v-icon>
+                        <span class="ms-3 text-h5" style="color:white">{{ likesQuantity }} Likes</span>
                     </div>
                 </v-img>
             </v-row>
@@ -29,6 +29,16 @@
                     </div>
                 </v-row>
             </div>
+            <v-row class="d-flex justify-center mb-10" style="transform: scale(1.5)">
+                    <form action="https://www.paypal.com/donate" method="post" target="_blank">
+                        <input type="hidden" name="hosted_button_id" value="7UCNHKMB8L85S" />
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0"
+                            name="submit" :title="`¡Realiza una donación para apoyar a ${band.title}!`"
+                            alt="Donate with PayPal button" />
+                        <img alt="" border="0" src="https://www.paypal.com/en_CL/i/scr/pixel.gif" width="1"
+                            height="1" />
+                    </form>
+            </v-row>
             <v-row class="my-5 justify-center flex-column text-center">
                 <v-card class="members-card py-15 d-flex justify-center flex-column text-center">
                     <v-card-title class="my-5 mx-auto text-h4"><strong>Conoce a los miembros de {{band.title}}</strong></v-card-title>
@@ -160,7 +170,6 @@ import userCollection from '../firebase/firestore'
             this.payload.currentUser = this.$store.state.currentUserData.userName
             this.payload.userID = auth.currentUser.uid
             this.getComments()
-
         },
     }
 </script>

@@ -9,7 +9,7 @@
       <v-row class="d-flex justify-center align-center" style="min-height: 80vh">
         <v-col v-for="(card, i) in searchBand" :key="i" class="col-sm col-md-6 col-lg-4">
           <v-card class="bandCard">
-            <v-card :to="`/banda/${i}/${card.view}`" style="height: 85%">
+            <v-card :to="`/banda/${card.index}/${card.view}`" style="height: 85%">
               <v-img :src="card.imgSrc" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                 height="200px">
                 <v-card-title v-text="card.title"></v-card-title>
@@ -47,16 +47,6 @@ import {doc, getDocs, updateDoc, arrayUnion, increment} from 'firebase/firestore
       comparedBands: null
     }),
     methods: {
-      compareLikes(){
-        this.bandsLiked.forEach(thisLikedBand => {
-        console.log(thisLikedBand)
-          // this.cards.forEach(card => {
-          //   if(card.title == thisLikedBand){
-          //     card.likedBand = true
-          //   }
-          // });
-        })
-      },
       async bandLiked(){
         const querySnapshot = await getDocs(userCollection)
         let bandsLiked = []
@@ -66,10 +56,24 @@ import {doc, getDocs, updateDoc, arrayUnion, increment} from 'firebase/firestore
             bandArray = doc.data().likes
             bandArray.forEach(band => {
               bandsLiked.push(band.title)
-              this.bandsLiked = bandsLiked
             })
           }
         });
+        let newArray = []
+        bandsLiked.forEach((bandliked) =>{
+          let likesFilter = this.cards.filter(band => {
+            return band.title.includes(bandliked)
+          })
+          this.cards.forEach(card =>{
+            if(likesFilter[0].title == card.title){
+              card.likedBand = true
+            }
+          })
+          
+
+
+          newArray.push(likesFilter[0])
+        })
       },
       async addLike(card) {
         card.likedBand = true
@@ -133,7 +137,6 @@ import {doc, getDocs, updateDoc, arrayUnion, increment} from 'firebase/firestore
     created() {
       this.cards = this.getBandas
       this.bandLiked()
-      // this.compareLikes()
     },
 
   }
