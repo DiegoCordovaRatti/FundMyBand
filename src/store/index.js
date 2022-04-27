@@ -16,6 +16,7 @@ export default new Vuex.Store({
         title: 'CorVje',
         index: 0,
         view: 'corvje',
+        likes: 0,
         likedBand: false,
         dialog: false,
         valid: true,
@@ -83,6 +84,7 @@ export default new Vuex.Store({
         title: 'Peor es Nada',
         index: 1,
         view: 'peor_es_nada',
+        likes: 0,
         likedBand: false,
         dialog: false,
         valid: true,
@@ -94,7 +96,7 @@ export default new Vuex.Store({
         spotifyUrl:"https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO0uwcgg?utm_source=generator&theme=0",
         bandMembers:[
           {
-            photo: 'https://scontent-scl2-1.xx.fbcdn.net/v/t39.30808-6/267265273_437947597892580_6326862844510232699_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=730e14&_nc_eui2=AeHhdPBGfn13xa9XEb2xlV29GWJ2nDuksJ8ZYnacO6Swn-S2r4HfpRMgq3GpvJI5Egg&_nc_ohc=pUDTiur_qW8AX8IVJfE&_nc_ht=scontent-scl2-1.xx&oh=00_AT8y-nCaXcIer1wyrg0E_4wj0j65oUbFSM9rsO9Ak30bOA&oe=62570829',
+            photo: 'https://scontent-scl2-1.xx.fbcdn.net/v/t39.30808-6/267265273_437947597892580_6326862844510232699_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=730e14&_nc_ohc=EuLQd0xvue4AX9Ura39&_nc_ht=scontent-scl2-1.xx&oh=00_AT8b6OKQlk2VNMr2EdF6H6RFjvh9VRSdhlxoueLNHJITMg&oe=626CC8E9',
             name: 'Juan Andrés Cabrera',
             role: 'Voz y guitarra',
             socialMedia:[
@@ -111,7 +113,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: 'https://scontent-scl2-1.xx.fbcdn.net/v/t39.30808-6/267477697_437947594559247_6535299271459415705_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=730e14&_nc_eui2=AeEJu2zzt3GYLWnY65mwJFqr6FC5SUQyFwHoULlJRDIXAbM-7czt9Il2K19nrTNf0hk&_nc_ohc=r-Egkw32CjUAX9_EeUm&_nc_ht=scontent-scl2-1.xx&oh=00_AT-sZOQHfdYN-olBhxwDhIHUluEjB601kgmib-qCekwVmg&oe=62579814',
+            photo: 'https://scontent-scl2-1.xx.fbcdn.net/v/t39.30808-6/267477697_437947594559247_6535299271459415705_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=730e14&_nc_ohc=Y3A877RW0GIAX8lVSmV&_nc_ht=scontent-scl2-1.xx&oh=00_AT8xEmHQCbpbn9NT95W7hMBy-ObIQeHdruj8lvWn2gwQaw&oe=626D58D4',
             name: 'Felipe Amigo',
             role: 'Guitarra',
             socialMedia:[
@@ -128,7 +130,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: 'https://scontent-scl2-1.xx.fbcdn.net/v/t39.30808-6/265979503_437947587892581_4366877693794313295_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=730e14&_nc_eui2=AeEaJ8_8B81pXVRF3JBv9y7QbNlHRDXSY5ds2UdENdJjl4F7NBck2ru7uN897mJFj50&_nc_ohc=rEXjtTsUXdYAX9obuuD&tn=jeNHjZ8h0jEjFOzI&_nc_ht=scontent-scl2-1.xx&oh=00_AT8fy5uwiKX5U1gb_PXoYGI6WgF_4M59IxcN6VZQV8-I2g&oe=6256F103',
+            photo: 'https://scontent-scl2-1.xx.fbcdn.net/v/t39.30808-6/265979503_437947587892581_4366877693794313295_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=730e14&_nc_ohc=Ig39ZYr0JucAX_73Cgu&tn=jeNHjZ8h0jEjFOzI&_nc_ht=scontent-scl2-1.xx&oh=00_AT9xZH0r6DzzpfrO7BCJTxMbfH6qjDVbmP9zYDDtgywQqQ&oe=626EAC03',
             name: 'Sebastián Solar',
             role: 'Batería',
             socialMedia:[
@@ -145,7 +147,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: 'https://scontent-scl2-1.xx.fbcdn.net/v/t39.30808-6/267589997_437947591225914_4551313098341181886_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=730e14&_nc_eui2=AeEFyHm-_Z-oQnQKNWrqZ-fpUOyWmD5OKH1Q7JaYPk4ofVLoY1T-uch5345iRQNy0H4&_nc_ohc=9xBv8yOhLRIAX9REBI4&_nc_oc=AQkyeXTI5GuEeqOf4CLOSuhacVfYzjZClVn7HIb0lbzzpNRNTVq0LGzF6YPc6HYWy0gvLx_nJLXXKGxU4soGFUrk&tn=jeNHjZ8h0jEjFOzI&_nc_ht=scontent-scl2-1.xx&oh=00_AT8buJdDu3e9c2uP2X2PHXo9chKIc_qqciNMONKEfgCjpQ&oe=6256E2D5',
+            photo: 'https://scontent-scl2-1.xx.fbcdn.net/v/t39.30808-6/267589997_437947591225914_4551313098341181886_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=730e14&_nc_ohc=8RWCEpnbqoIAX8w7hWE&_nc_oc=AQkBOruUIAmLQ1FpR5PbuABTNC234-oM9MqPxBdJQTo_mXUD08u_Nwsjeh_9LZNs1Eghm_rw_pv_wwOPIKvAxxMq&tn=jeNHjZ8h0jEjFOzI&_nc_ht=scontent-scl2-1.xx&oh=00_AT9qP2VhfS8OtuWXZQCAuUnKrXp1LU1hKKBPlYNmhy6vdg&oe=626E9DD5',
             name: 'Matías Zamorano',
             role: 'Bajo',
             socialMedia:[
@@ -167,6 +169,7 @@ export default new Vuex.Store({
         title: 'Sin Instrumento Alguno',
         index: 2,
         view: 'sin_instrumento_alguno',
+        likes: 0,
         likedBand: false,
         dialog: false,
         valid: true,
@@ -251,6 +254,7 @@ export default new Vuex.Store({
         title: 'Niños Del Cerro',
         index: 3,
         view: 'niños-del-cerro',
+        likes: 0,
         likedBand: false,
         dialog: false,
         valid: true,
@@ -279,7 +283,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: '',
+            photo: 'https://randomuser.me/api/portraits/men/1.jpg',
             name: 'Ignacio Castillo',
             role: 'guitarra',
             socialMedia:[
@@ -296,7 +300,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: '',
+            photo: 'https://randomuser.me/api/portraits/men/11.jpg',
             name: 'José Mazurett',
             role: 'batería',
             socialMedia:[
@@ -313,7 +317,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: '',
+            photo: 'https://randomuser.me/api/portraits/men/12.jpg',
             name: 'Felipe Villarubia',
             role: 'bajo',
             socialMedia:[
@@ -330,7 +334,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: '',
+            photo: 'https://randomuser.me/api/portraits/men/14.jpg',
             name: 'Diego Antiman',
             role: 'teclados',
             socialMedia:[
@@ -352,6 +356,7 @@ export default new Vuex.Store({
         title: 'Ágata Prisma',
         index: 4,
         view: 'agata-prisma',
+        likes: 0,
         likedBand: false,
         dialog: false,
         valid: true,
@@ -385,6 +390,7 @@ export default new Vuex.Store({
         title: 'Yorka',
         index: 5,
         view: 'yorka',
+        likes: 0,
         likedBand: false,
         dialog: false,
         valid: true,
@@ -396,7 +402,7 @@ export default new Vuex.Store({
         spotifyUrl:'https://open.spotify.com/embed/album/2aVf2kvguncX8TGNEIIwxB?utm_source=generator&theme=0',
         bandMembers:[
           {
-            photo: '',
+            photo: 'https://media.biobiochile.cl/wp-content/uploads/2020/04/yorkapastenes.jpg',
             name: 'Yorka Pastenes',
             role: 'Composición, guitarra y voz ',
             socialMedia:[
@@ -413,7 +419,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: '',
+            photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShetKcDXDJjHCua1lzgV_r4UThzAqKa37Ijg&usqp=CAU',
             name: 'Daniela Pastenes',
             role: 'Percusiones, ukelele y voz',
             socialMedia:[
@@ -430,7 +436,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: '',
+            photo: 'https://randomuser.me/api/portraits/men/15.jpg',
             name: 'Pablo Jara',
             role: 'Guitarra',
             socialMedia:[
@@ -447,7 +453,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: '',
+            photo: 'https://randomuser.me/api/portraits/men/16.jpg',
             name: 'Pancho Ugarte',
             role: 'Bajo',
             socialMedia:[
@@ -464,7 +470,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: '',
+            photo: 'https://randomuser.me/api/portraits/men/31.jpg',
             name: 'Matías Petersen',
             role: 'batería ',
             socialMedia:[
@@ -486,6 +492,7 @@ export default new Vuex.Store({
         title: 'Nicole Bunout',
         index: 6,
         view: 'nicole-bunout',
+        likes: 0,
         likedBand: false,
         dialog: false,
         valid: true,
@@ -514,7 +521,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: '',
+            photo: 'https://randomuser.me/api/portraits/men/18.jpg',
             name: 'Fernando Rain ',
             role: '',
             socialMedia:[
@@ -531,7 +538,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: '',
+            photo: 'https://randomuser.me/api/portraits/men/19.jpg',
             name: 'Sebastián González ',
             role: '',
             socialMedia:[
@@ -548,7 +555,7 @@ export default new Vuex.Store({
             ]
           },
           {
-            photo: '',
+            photo: 'https://randomuser.me/api/portraits/men/20.jpg',
             name: 'Ramiro Durán',
             role: '',
             socialMedia:[

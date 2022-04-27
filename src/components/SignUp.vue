@@ -3,7 +3,8 @@
         <v-container style="min-height: 80vh;">
             <v-row class="d-flex flex-row-reverse">
                 <v-col class="col-sm col-md-6 d-flex justify-center align-center">
-                    <v-card class="d-flex align-center" style="width:100%">
+                    <v-card class="d-flex flex-column align-center" style="width:100%">
+                        <v-card-title><u>Registra tu usuario</u></v-card-title>
                         <v-form class="pa-5" ref="form" v-model="valid" lazy-validation style="width: 100%">
                             <v-row>
                                 <v-col cols="12" sm="6">

@@ -1,18 +1,20 @@
 <template>
-    <v-carousel v-model="model">
-        <v-carousel-item :to="item.view" v-for="(item, i) in items" :key="i" :src="item.src">
-            <v-sheet color="transparent" height="100%" tile>
-                <v-row class="fill-height flex-column" align="center" justify="center">
-                    <div class="text-h2" :style="item.textColor">
-                        {{ item.header }}
-                    </div>
-                    <div class="text-h5" :style="item.textColor">
-                        {{ item.msg }}
-                    </div>
-                </v-row>
-            </v-sheet>
-        </v-carousel-item>
-    </v-carousel>
+    <div>
+        <v-carousel style="width: 100vw">
+            <v-carousel-item :to="item.view" v-for="(item, i) in items" :key="i" :src="item.src">
+                <v-sheet color="transparent" height="100%" tile>
+                    <v-row class="fill-height flex-column text-center mx-5" align="center" justify="center">
+                        <div class="text-h2" :style="item.textColor">
+                            {{ item.header }}
+                        </div>
+                        <div class="text-h5" :style="item.textColor">
+                            {{ item.msg }}
+                        </div>
+                    </v-row>
+                </v-sheet>
+            </v-carousel-item>
+        </v-carousel>
+    </div>
 </template>
 
 <script>

@@ -1,8 +1,13 @@
 <template>
   <div>
     <v-container class="mt-md-15" style="">
+      <v-row>
+        <v-col>
+          <v-text-field filled dark v-model="select" class="mx-4" flat label="¿Buscas una banda en especifico?"></v-text-field>
+        </v-col>
+      </v-row>
       <v-row class="d-flex justify-center align-center" style="min-height: 80vh">
-        <v-col v-for="(card, i) in cards" :key="i" class="col-sm col-md-6 col-lg-4">
+        <v-col v-for="(card, i) in searchBand" :key="i" class="col-sm col-md-6 col-lg-4">
           <v-card class="bandCard">
             <v-card :to="`/banda/${i}/${card.view}`" style="height: 85%">
               <v-img :src="card.imgSrc" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
@@ -35,19 +40,22 @@ import bandasCollection from '../firebase/bandasFirestore'
 import {doc, getDocs, updateDoc, arrayUnion, increment} from 'firebase/firestore'
   export default {
     data: () => ({
+      select: '',
       cards: null,
       currentUserLikes: null,
       bandsLiked: [],
       comparedBands: null
     }),
     methods: {
-      compareLikes(thisBand){
-        this.bandsLiked.forEach(band =>{
-          if(thisBand.title == band){
-            thisBand.likedBand = true
-          }
+      compareLikes(){
+        this.bandsLiked.forEach(thisLikedBand => {
+        console.log(thisLikedBand)
+          // this.cards.forEach(card => {
+          //   if(card.title == thisLikedBand){
+          //     card.likedBand = true
+          //   }
+          // });
         })
-        console.log(thisBand.title)
       },
       async bandLiked(){
         const querySnapshot = await getDocs(userCollection)
@@ -62,7 +70,6 @@ import {doc, getDocs, updateDoc, arrayUnion, increment} from 'firebase/firestore
             })
           }
         });
-        console.log(bandsLiked)
       },
       async addLike(card) {
         card.likedBand = true
@@ -117,13 +124,18 @@ import {doc, getDocs, updateDoc, arrayUnion, increment} from 'firebase/firestore
       getBandas() {
         return this.$store.state.bandas
       },
+      searchBand(){
+        return this.cards.filter(band => {
+            return band.title.toLowerCase().includes(this.select.toLowerCase())
+        })
+      }
     },
     created() {
       this.cards = this.getBandas
+      this.bandLiked()
+      // this.compareLikes()
     },
-    mounted() {
-      // this.bandLiked()
-    },
+
   }
 </script>
 <style scoped>

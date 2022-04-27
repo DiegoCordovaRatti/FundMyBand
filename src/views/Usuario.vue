@@ -1,9 +1,9 @@
 <template lang="">
     <div>
-        <v-container class="" style="min-height: 100vh">
+        <v-container class="d-flex flex-column justify-center align-center" style="min-height: 100vh">
             <v-row class="d-flex justify-center align-center mb-15" style="margin-top: 10vh; width: 100%">
                 <v-card style="height: 100%">
-                    <v-img class="d-flex align-end" height="250" :src="currentUser.banner">
+                    <v-img class="d-flex align-end" height="250" :src="newBanner">
                         <v-row>
                             <v-col>
                                 <v-avatar color="red">
@@ -19,21 +19,17 @@
                                             Cambiar Banner
                                         </v-btn>
                                     </template>
-
                                     <v-card>
                                         <v-card-title class="text-h5 grey lighten-2">
                                             Cambiar Banner
                                         </v-card-title>
-
                                         <v-row>
                                             <v-col v-for="(item, i) in items" :key="i">
                                                 <v-img class="bannerImg" :src="item"
                                                     @click="updateBanner(item); dialog2 = false"></v-img>
                                             </v-col>
                                         </v-row>
-
                                         <v-divider></v-divider>
-
                                         <v-card-actions>
                                             <v-spacer></v-spacer>
                                             <v-btn color="primary" text @click="dialog2 = false">
@@ -52,97 +48,91 @@
                                 <v-row class="ma-0 pa-0">
                                     <v-col class="ma-0 pa-0">
                                         <p><strong>Usuario:</strong> {{ currentUser.userName }}</p>
-                                        </v-col>
-                                        <v-col class="d-flex justify-end ma-0 pa-0">
-                                            <v-dialog v-model="dialog3" style="width: 70vw">
-                                                <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on">
-                                                        Cambiar Nombre de usuario
+                                    </v-col>
+                                    <v-col class="d-flex justify-end ma-0 pa-0">
+                                        <v-dialog v-model="dialog3" style="width: 70vw">
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on">
+                                                    Cambiar Nombre de usuario
+                                                </v-btn>
+                                            </template>
+                                            <v-card>
+                                                <v-card-title class="text-h5 grey lighten-2">
+                                                    Cambiar Nombre de Usuario
+                                                </v-card-title>
+                                                <v-text-field v-model="newUserName"
+                                                    :rules="[val => (val || '').length > 0 || 'Esta area es requerida']"
+                                                    color="purple darken-2" label="Nombre de Usuario" required>
+                                                </v-text-field>
+                                                <v-divider></v-divider>
+                                                <v-card-actions>
+                                                    <v-spacer></v-spacer>
+                                                    <v-btn color="primary" text
+                                                        @click="updateUserName(); dialog3 = false">
+                                                        Cambiar
                                                     </v-btn>
-                                                </template>
-
-                                                <v-card>
-                                                    <v-card-title class="text-h5 grey lighten-2">
-                                                        Cambiar Nombre de Usuario
-                                                    </v-card-title>
-
-                                                    <v-text-field v-model="newUserName" :rules="[val => (val || '').length > 0 || 'Esta area es requerida']" color="purple darken-2" label="Nombre de Usuario" required></v-text-field>
-
-                                                    <v-divider></v-divider>
-
-                                                    <v-card-actions>
-                                                        <v-spacer></v-spacer>
-                                                        <v-btn color="primary" text @click="updateUserName(); dialog3 = false">
-                                                            Cambiar
-                                                        </v-btn>
-                                                    </v-card-actions>
-                                                </v-card>
-                                            </v-dialog>
-                                        </v-col>
-                                        </v-row>
-                                        <v-row class="ma-0 pa-0">
-                                            <v-col class="ma-0 pa-0">
-                                                <p><strong>Nombre:</strong> {{ currentUser.firstName }}
-                                                    {{ currentUser.lastName }}</p>
-                                            </v-col>
-                                        </v-row>
-                                        <v-row class="ma-0 pa-0">
-                                            <p><strong>Edad:</strong> {{ currentUser.age }}</p>
-                                        </v-row>
-                                        <v-row class="ma-0 pa-0">
-                                            <p><strong>E-mail:</strong> {{ currentUser.email }}</p>
-                                        </v-row>
-                                        </div>
-                                        </v-row>
-
-                                        </v-card-text>
-                                        <v-divider class="mx-4"></v-divider>
-                                        <v-card-title>Actividad</v-card-title>
-                                        <v-card-text>
-                                            <v-row class="justify-center">
-                                                <v-btn-toggle v-model="toggle_multiple" dense background-color="primary"
-                                                    dark multiple>
-                                                    <v-btn color="primary" dark @click.stop="dialog = true">Me gusta
-                                                    </v-btn>
-                                                    <v-dialog v-model="dialog" style="width: 100vw">
-                                                        <v-card>
-                                                            <v-card-title class="text-h5">Bandas que te gustan
-                                                            </v-card-title>
-                                                            <v-card class="mx-auto col-sm col-md-6 my-5"
-                                                                v-for="(likedBand, i) in currentUser.likes" :key="i"
-                                                                outlined>
-                                                                <v-list-item three-line>
-                                                                    <v-list-item-content>
-                                                                        <v-list-item-title
-                                                                            class="text-sm-h5 text-md-h4 text-lg-h3">
-                                                                            {{ likedBand.title }}
-                                                                        </v-list-item-title>
-                                                                    </v-list-item-content>
-                                                                    <v-list-item-avatar tile size="100">
-                                                                        <v-img :src="likedBand.imgSrc"></v-img>
-                                                                    </v-list-item-avatar>
-                                                                </v-list-item>
-                                                                <v-card-actions>
-                                                                    <v-btn
-                                                                        :to="`/banda/${likedBand.index}/${likedBand.view}`"
-                                                                        color="success" outline rounded text>
-                                                                        Ir a la página de la banda
-                                                                    </v-btn>
-                                                                </v-card-actions>
-                                                            </v-card>
-                                                            <v-spacer></v-spacer>
-                                                            <v-card-actions>
-                                                                <v-btn color="green darken-1" text
-                                                                    @click="dialog = false">
-                                                                    Close
-                                                                </v-btn>
-                                                            </v-card-actions>
-                                                        </v-card>
-                                                    </v-dialog>
-                                                </v-btn-toggle>
-                                            </v-row>
-                                        </v-card-text>
+                                                </v-card-actions>
+                                            </v-card>
+                                        </v-dialog>
+                                    </v-col>
+                                </v-row>
+                                <v-row class="ma-0 pa-0">
+                                    <v-col class="ma-0 pa-0">
+                                        <p><strong>Nombre:</strong> {{ currentUser.firstName }}
+                                            {{ currentUser.lastName }}</p>
+                                    </v-col>
+                                </v-row>
+                                <v-row class="ma-0 pa-0">
+                                    <p><strong>Edad:</strong> {{ currentUser.age }}</p>
+                                </v-row>
+                                <v-row class="ma-0 pa-0">
+                                    <p><strong>E-mail:</strong> {{ currentUser.email }}</p>
+                                </v-row>
+                            </div>
+                        </v-row>
+                    </v-card-text>
+                    <v-divider class="mx-4"></v-divider>
+                    <v-card-title>Actividad</v-card-title>
+                    <v-card-text>
+                        <v-row class="justify-center">
+                            <v-btn-toggle v-model="toggle_multiple" dense background-color="primary" dark multiple>
+                                <v-btn color="primary" dark @click.stop="dialog = true">Me gusta
+                                </v-btn>
+                                <v-dialog v-model="dialog" style="width: 100vw">
+                                    <v-card>
+                                        <v-card-title class="text-h5">Bandas que te gustan
+                                        </v-card-title>
+                                        <v-card class="mx-auto col-sm col-md-6 my-5"
+                                            v-for="(likedBand, i) in currentUser.likes" :key="i" outlined>
+                                            <v-list-item three-line>
+                                                <v-list-item-content>
+                                                    <v-list-item-title class="text-sm-h5 text-md-h4 text-lg-h3">
+                                                        {{ likedBand.title }}
+                                                    </v-list-item-title>
+                                                </v-list-item-content>
+                                                <v-list-item-avatar tile size="100">
+                                                    <v-img :src="likedBand.imgSrc"></v-img>
+                                                </v-list-item-avatar>
+                                            </v-list-item>
+                                            <v-card-actions>
+                                                <v-btn :to="`/banda/${likedBand.index}/${likedBand.view}`"
+                                                    color="success" outline rounded text>
+                                                    Ir a la página de la banda
+                                                </v-btn>
+                                            </v-card-actions>
                                         </v-card>
+                                        <v-spacer></v-spacer>
+                                        <v-card-actions>
+                                            <v-btn color="green darken-1" text @click="dialog = false">
+                                                Close
+                                            </v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
+                            </v-btn-toggle>
+                        </v-row>
+                    </v-card-text>
+                </v-card>
             </v-row>
             <v-row class="flex-column justify-center text-center" style="width: 100%">
                 <v-title class="text-h3">Otros Usuarios</v-title>
@@ -154,24 +144,19 @@
                                     {{ otherUser.userName }}
                                 </v-card-title>
                             </v-img>
-
                             <v-card-actions>
                                 <v-btn @click="otherUser.show = !otherUser.show" class="overflow-hidden"
                                     color="orange lighten-2" text small>
                                     Le gusta a {{ otherUser.userName }}
                                 </v-btn>
-
                                 <v-spacer></v-spacer>
-
                                 <v-btn icon @click="otherUser.show = !otherUser.show">
                                     <v-icon>{{ otherUser.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
                                 </v-btn>
                             </v-card-actions>
-
                             <v-expand-transition>
                                 <div v-show="otherUser.show">
                                     <v-divider></v-divider>
-
                                     <v-card class="mx-auto col-sm" v-for="(otherUserLikes, i) in otherUser.likes"
                                         :key="i" outlined>
                                         <v-list-item three-line>
@@ -249,11 +234,13 @@ export default {
             await updateDoc(doc(userCollection, auth.currentUser.uid), {
                 banner: this.newBanner
             })
+
         },
         async updateUserName(){
             await updateDoc(doc(userCollection, auth.currentUser.uid), {
                 userName: this.newUserName
             })
+            this.currentUser.userName = this.newUserName
         }
     },
     async mounted() {
@@ -276,6 +263,8 @@ export default {
             }
         });
         this.currentUser = currentUserData
+        this.newBanner = this.currentUser.banner
+        this.newUserName = this.currentUser.userName
         this.otherUsersData = otherUsersData
         this.picsumImg = this.picsum
     },
