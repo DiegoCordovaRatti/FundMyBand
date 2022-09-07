@@ -89,6 +89,7 @@ import userCollection from '../firebase/firestore'
             items:[],
             payload: {
                 signedIn: true,
+                Data: null,
                 currentUserID: null,
                 currentUserData: null,
                 usersData: null,
@@ -145,13 +146,14 @@ import userCollection from '../firebase/firestore'
                     }
                     usersData.push(doc.data())
                 });
+                this.payload.data = auth.currentUser
                 this.payload.currentUserData = currentUserData
                 this.payload.usersData = usersData
-                this.$router.push("/")
                 this.$store.commit('SIGNED_IN', this.payload)
+                this.$router.push("/")
             }
         },
-        created(){
+        async beforeCreate(){
             fetch('https://picsum.photos/v2/list?page=1&limit=50')
                     .then(response => response.json())
                     .then(response => {

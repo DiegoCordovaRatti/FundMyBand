@@ -98,10 +98,6 @@ import userCollection from '../firebase/firestore'
                 this.$store.commit('SIGNED_IN', this.payload)
             }
         },
-        created() {
-            console.log(auth.currentUser)
-            console.log(this.$store.state.data)
-        },
     }
 </script>
 
