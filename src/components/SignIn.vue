@@ -46,6 +46,7 @@ import userCollection from '../firebase/firestore'
         data: () => ({
             valid: true,
             payload :{
+                data: null,
                 signedIn: true,
                 currentUserID: null,
                 currentUserData: null,
@@ -86,6 +87,7 @@ import userCollection from '../firebase/firestore'
                     }
                     usersData.push(doc.data())
                 });
+                this.payload.data = auth.currentUser
                 this.payload.currentUserData = currentUserData
                 this.payload.usersData = usersData
                 this.payload.currentUserID = auth.currentUser.uid
@@ -95,6 +97,10 @@ import userCollection from '../firebase/firestore'
                 setTimeout(pushRoute, 500)
                 this.$store.commit('SIGNED_IN', this.payload)
             }
+        },
+        created() {
+            console.log(auth.currentUser)
+            console.log(this.$store.state.data)
         },
     }
 </script>

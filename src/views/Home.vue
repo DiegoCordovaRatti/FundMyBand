@@ -95,8 +95,6 @@ export default {
         return b.likes - a.likes
       })
       this.getUserLikes()
-      
-
     },
   }
 </script>

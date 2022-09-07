@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import createPersistedState from 'vuex-persistedstate';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  // plugins: [createPersistedState()],
+  plugins: [createPersistedState()],
   state: {
     signedIn: false,
+    data: null,
+    currentUserID: null,
     usersData: null,
     currentUserData: null,
-    currentUserID: null,
     bandas:[
       {
         title: 'CorVje',
@@ -590,10 +591,14 @@ export default new Vuex.Store({
       state.currentUserID = payload.currentUserID
       state.currentUserData = payload.currentUserData
       state.usersData = payload.usersData
+      state.data = payload.data
     },
     SIGN_OUT(state, payload){
       state.signedIn = payload
     }
+  },
+  getters:{
+    data: state => state.data
   },
   actions: {
   },

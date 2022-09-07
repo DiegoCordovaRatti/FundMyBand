@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import auth from '../firebase/authentification'
+// import auth from '../firebase/authentification'
+import store from '../store/index'
 const Home = () => import('../views/Home.vue')
 const ListaBandas = () => import('../views/ListaBandas.vue')
 const Banda = () => import('../views/Banda.vue')
@@ -68,7 +69,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  let email = auth.currentUser;
+  let email = store.getters.data; 
   let authRequired = to.matched.some((route) => route.meta.guardRoutes);
   if (!email && authRequired) {
     next("/ingresa");
