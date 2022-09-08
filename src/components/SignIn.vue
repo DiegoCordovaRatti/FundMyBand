@@ -31,7 +31,7 @@
             </v-row>
         </v-container>
         <v-snackbar v-model="snackbar">
-            Bienvenido, {{email}}
+            {{ snackbarMessage }}
         </v-snackbar>
     </div>
 </template>
@@ -45,25 +45,26 @@ import userCollection from '../firebase/firestore'
     export default {
         data: () => ({
             valid: true,
-            payload :{
+            payload: {
                 data: null,
                 signedIn: true,
                 currentUserID: null,
                 currentUserData: null,
                 usersData: null,
-                },
+            },
             snackbar: false,
             email: '',
             password: '',
+            snackbarMessage: null,
             showPassword: false,
             rules: {
                 required: value => !!value || 'Esta area es requerida.',
                 min: v => v.length >= 8 || 'Ingresa 8 caracteres como minimo',
                 emailMatch: () => (`El e-mail o la contraseña que ingresaste no concuerdan`),
                 emailRules: [
-                v => !!v || 'E-mail requerido',
-                v => /.+@.+\..+/.test(v) || 'El e-mail debe ser válido',
-            ],
+                    v => !!v || 'E-mail requerido',
+                    v => /.+@.+\..+/.test(v) || 'El e-mail debe ser válido',
+                ],
             },
         }),
 
@@ -76,26 +77,42 @@ import userCollection from '../firebase/firestore'
             },
             ...mapMutations(['SIGNED_IN']),
             async signIn() {
-                await signInWithEmailAndPassword(auth, this.email, this.password)
-                this.snackbar = true
-                let currentUserData = null
-                let usersData = []
-                const querySnapshot = await getDocs(userCollection)
-                querySnapshot.docs.forEach(doc => {
-                    if (doc.id == auth.currentUser.uid) {
-                        currentUserData = doc.data()
+                try {
+                    await signInWithEmailAndPassword(auth, this.email, this.password)
+                    this.snackbarMessage = `Bienvenido, ${this.email}`
+                    this.snackbar = true
+                    let currentUserData = null
+                    let usersData = []
+                    const querySnapshot = await getDocs(userCollection)
+                    querySnapshot.docs.forEach(doc => {
+                        if (doc.id == auth.currentUser.uid) {
+                            currentUserData = doc.data()
+                        }
+                        usersData.push(doc.data())
+                    });
+                    this.payload.data = auth.currentUser
+                    this.payload.currentUserData = currentUserData
+                    this.payload.usersData = usersData
+                    this.payload.currentUserID = auth.currentUser.uid
+                    let pushRoute = () => {
+                        this.$router.push("/")
                     }
-                    usersData.push(doc.data())
-                });
-                this.payload.data = auth.currentUser
-                this.payload.currentUserData = currentUserData
-                this.payload.usersData = usersData
-                this.payload.currentUserID = auth.currentUser.uid
-                let pushRoute = () => {
-                    this.$router.push("/")
+                    setTimeout(pushRoute, 500)
+                    this.$store.commit('SIGNED_IN', this.payload)
+                } catch (error) {
+                    if(error.code == "auth/user-not-found"){
+                        this.snackbarMessage = `Usuario invalido, intente con otro.`
+                    }
+                    
+                    else if(error.code == "auth/wrong-password"){
+                        this.snackbarMessage = `Contraseña invalida, intente con otra.`
+                    }
+                    else{
+                        console.log(error)
+                        this.snackbarMessage = `Un error ha ocurrido, intente de nuevo`
+                    }
+                    this.snackbar = true
                 }
-                setTimeout(pushRoute, 500)
-                this.$store.commit('SIGNED_IN', this.payload)
             }
         },
     }

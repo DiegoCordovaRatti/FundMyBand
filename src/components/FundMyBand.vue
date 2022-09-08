@@ -4,14 +4,14 @@
             <v-card-title><h1>¿Qué es FundMyBand?</h1></v-card-title>
             <br>
             <v-card-subtitle><h4><strong>FundMyBand</strong> es un proyecto sin fines de lucro para impulsar el desarrollo de bandas chilenas menos conocidas o del genero Indie</h4></v-card-subtitle>
-            <v-row class="d-flex justify-center align-center mx-5 mb-10">
-                <v-card v-for="(cardInfo, i) in cardsInfo" :key="i" class="col-sm col-md-4 my-3 d-flex justify-center align-center flex-column" style="min-height: 70vh">
-                    <v-img :src="cardInfo.imgSrc" width="300"></v-img>
+            <v-row class="d-flex justify-center align-center mx-5 mb-10" style="width: 100%">
+                <v-card v-for="(cardInfo, i) in cardsInfo" :key="i" class="col-sm col-md-4 my-3 d-flex justify-center align-center flex-column" style="min-height: 580px">
+                    <v-img :src="cardInfo.imgSrc" style="min-height:40vh; object-fit: cover;"></v-img>
                     <v-card-title>{{ cardInfo.title }}</v-card-title>
                     <v-card-text>{{ cardInfo.text }}</v-card-text>
                 </v-card>
             </v-row>
-            <fav-band></fav-band>
+            <fav-band v-if="showFavBands"></fav-band>
         </v-card>
     </div>
 </template>
@@ -19,6 +19,9 @@
 import FavBand from './FavBand.vue'
 export default {
     components: { FavBand },
+    props:{
+        showFavBands: Boolean
+    },
     data() {
         return {
             cardsInfo: [

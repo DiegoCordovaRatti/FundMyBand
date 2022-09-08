@@ -5,7 +5,7 @@
     </v-row>
 
     <v-row class="d-flex justify-center align-center text-center mb-10" style="min-height: 80vh">
-      <fund-my-band></fund-my-band>
+      <fund-my-band :showFavBands="true"></fund-my-band>
     </v-row>
 
     <v-row>

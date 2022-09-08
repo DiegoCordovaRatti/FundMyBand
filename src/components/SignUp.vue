@@ -1,6 +1,7 @@
 <template>
     <div id="signUp">
         <v-container style="min-height: 80vh;">
+            
             <v-row class="d-flex flex-row-reverse">
                 <v-col class="col-sm col-md-6 d-flex justify-center align-center">
                     <v-card class="d-flex flex-column align-center" style="width:100%">
@@ -70,7 +71,7 @@
             </v-row>
         </v-container>
         <v-snackbar v-model="snackbar">
-            Su cuenta ha sido creada exitosamente, {{userName}}
+            {{ snackbarMessage }}
         </v-snackbar>
 
         </div>
@@ -95,6 +96,7 @@ import userCollection from '../firebase/firestore'
                 usersData: null,
             },
             snackbar: false,
+            snackbarMessage: null,
             firstName: '',
             lastName: '',
             userName: '',
@@ -120,37 +122,49 @@ import userCollection from '../firebase/firestore'
             },
             ...mapMutations(['SIGNED_IN']),
             async signUp() {
-                this.$refs.form.validate()
-                await createUserWithEmailAndPassword(auth, this.email, this.password)
-                let user = auth.currentUser
-                this.payload.currentUserID = auth.currentUser.uid
-                await setDoc(doc(userCollection, user.uid), {
-                    firstName: this.firstName,
-                    lastName: this.lastName,
-                    userName: this.userName,
-                    age: this.age,
-                    email: this.email,
-                    password: this.password,
-                    uid: this.payload.currentUserID,
-                    show: false,
-                    banner: this.banner.image,
-                    likes: [],
-                })
-                this.snackbar = true
-                let currentUserData = null
-                let usersData = []
-                const querySnapshot = await getDocs(userCollection)
-                querySnapshot.docs.forEach(doc => {
-                    if (doc.id == auth.currentUser.uid) {
-                        currentUserData = doc.data()
+                try {
+                    this.$refs.form.validate()
+                    await createUserWithEmailAndPassword(auth, this.email, this.password)
+                    this.snackbarMessage = `Su cuenta ha sido creada exitosamente, ${this.userName}`
+                    let user = auth.currentUser
+                    this.payload.currentUserID = auth.currentUser.uid
+                    await setDoc(doc(userCollection, user.uid), {
+                        firstName: this.firstName,
+                        lastName: this.lastName,
+                        userName: this.userName,
+                        age: this.age,
+                        email: this.email,
+                        password: this.password,
+                        uid: this.payload.currentUserID,
+                        show: false,
+                        banner: this.banner.image,
+                        likes: [],
+                    })
+                    this.snackbar = true
+                    let currentUserData = null
+                    let usersData = []
+                    const querySnapshot = await getDocs(userCollection)
+                    querySnapshot.docs.forEach(doc => {
+                        if (doc.id == auth.currentUser.uid) {
+                            currentUserData = doc.data()
+                        }
+                        usersData.push(doc.data())
+                    });
+                    this.payload.data = auth.currentUser
+                    this.payload.currentUserData = currentUserData
+                    this.payload.usersData = usersData
+                    this.$store.commit('SIGNED_IN', this.payload)
+                    this.$router.push("/")
+                } catch (error) {
+                    if (error.code == "auth/email-already-in-use") {
+                        this.snackbarMessage = `El email ya está en uso, intente con otro.`
                     }
-                    usersData.push(doc.data())
-                });
-                this.payload.data = auth.currentUser
-                this.payload.currentUserData = currentUserData
-                this.payload.usersData = usersData
-                this.$store.commit('SIGNED_IN', this.payload)
-                this.$router.push("/")
+                    else{
+                        console.log(error)
+                        this.snackbarMessage = `Error al registrar usuario, intente de nuevo.`
+                    }
+                    this.snackbar = true
+                }
             }
         },
         async beforeCreate(){
