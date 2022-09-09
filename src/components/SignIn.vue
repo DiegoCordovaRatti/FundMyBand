@@ -3,17 +3,17 @@
         <v-container>
             <v-row>
                 <v-col class="d-flex align-center justify-center" style="min-height: 80vh;">
-                    <v-card class="d-flex flex-column align-center justify-center" style="height: 50%; width: 100%">
+                    <v-card class="d-flex flex-column align-center justify-center" style="height: 70%; width: 100%">
                         <v-card-title><u>Ingresa a tu cuenta</u></v-card-title>
                         <v-form class="px-5" ref="form" v-model="valid" lazy-validation style="width: 100%">
-                            <v-text-field v-model="email" :rules="rules.emailRules" label="E-mail" required>
+                            <v-text-field class="my-5" v-model="email" :rules="rules.emailRules" label="E-mail" required>
                             </v-text-field>
-                            <v-text-field v-model="password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                            <v-text-field class="my-5" v-model="password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                                 :rules="[rules.required, rules.min]" :type="showPassword ? 'text' : 'password'"
                                 name="input-10-1" label="Contraseña" hint="Tu contraseña debe tener 8 caracteres"
                                 counter @click:append="showPassword = !showPassword">
                             </v-text-field>
-                            <v-row>
+                            <v-row class="my-5">
                                 <v-btn :disabled="!valid" color="success" class="mr-4" @click="signIn" small>
                                     Ingresar
                                 </v-btn>

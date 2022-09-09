@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-tabs class="mt-md-15" v-model="tab" centered dark icons-and-text>
+        <v-tabs v-model="tab" centered dark icons-and-text>
             <v-tabs-slider></v-tabs-slider>
             <v-tab href="#resgistrate">
                 Regístrate

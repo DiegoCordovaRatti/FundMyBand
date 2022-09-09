@@ -1,46 +1,42 @@
 <template>
     <div id="signUp">
         <v-container style="min-height: 80vh;">
-            
-            <v-row class="d-flex flex-row-reverse">
-                <v-col class="col-sm col-md-6 d-flex justify-center align-center">
+
+            <v-row class="d-flex">
+                <v-col class="col-sm col-md-3 d-flex justify-center align-center">
                     <v-card class="d-flex flex-column align-center" style="width:100%">
-                        <v-card-title><u>Registra tu usuario</u></v-card-title>
                         <v-form class="pa-5" ref="form" v-model="valid" lazy-validation style="width: 100%">
                             <v-row>
-                                <v-col cols="12" sm="6">
-                                    <v-text-field v-model="firstName" :rules="rules.name" color="purple darken-2"
-                                        label="Nombre" required></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6">
-                                    <v-text-field v-model="lastName" :rules="rules.name" color="blue darken-2"
-                                        label="Apellidos" required>
-                                    </v-text-field>
-                                </v-col>
+                                <v-text-field v-model="firstName" :rules="rules.name" color="purple darken-2"
+                                    label="Nombre" required></v-text-field>
                             </v-row>
                             <v-row>
-                                <v-col cols="12" sm="6">
-                                    <v-text-field v-model="userName" :rules="rules.name" color="purple darken-2"
-                                        label="Nombre de Usuario" required></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6">
-                                    <v-slider v-model="age" :rules="rules.age" color="orange" label="Edad"
-                                        hint="Desliza para indicar tu edad" min="0" max="100" thumb-label required>
-                                    </v-slider>
-                                </v-col>
+                                <v-text-field v-model="lastName" :rules="rules.name" color="blue darken-2"
+                                    label="Apellidos" required>
+                                </v-text-field>
                             </v-row>
-
-                            <v-row align="center">
-                                    <v-select v-model="banner" :items="items" label="Elige un banner para tu cuenta" :rules="[(v) => !!v || 'Debes elegir un banner']" required>
-                                        <template v-slot:selection="{ item }">
-                                            {{ item.name }}) <v-spacer></v-spacer><img :src="item.image" width="150" class="my-2">
-                                        </template>
-                                        <template v-slot:item="{ item }">
-                                            {{ item.name }}) <v-spacer></v-spacer><img :src="item.image" width="150" class="my-2">
-                                        </template>
-                                    </v-select>
+                            <v-row>
+                                <v-text-field v-model="userName" :rules="rules.name" color="purple darken-2"
+                                    label="Nombre de Usuario" required></v-text-field>
                             </v-row>
-
+                            <v-row>
+                                <v-slider v-model="age" :rules="rules.age" color="orange" label="Edad"
+                                    hint="Desliza para indicar tu edad" min="0" max="100" thumb-label required>
+                                </v-slider>
+                            </v-row>
+                            <v-row>
+                                <v-select v-model="banner" :items="items" label="Elige un banner para tu cuenta"
+                                    :rules="[(v) => !!v || 'Debes elegir un banner']" required>
+                                    <template v-slot:selection="{ item }">
+                                        {{ item.name }}) <v-spacer></v-spacer><img :src="item.image" width="150"
+                                            class="my-2">
+                                    </template>
+                                    <template v-slot:item="{ item }">
+                                        {{ item.name }}) <v-spacer></v-spacer><img :src="item.image" width="150"
+                                            class="my-2">
+                                    </template>
+                                </v-select>
+                            </v-row>
                             <v-row>
                                 <v-text-field v-model="email" :rules="rules.emailRules" label="E-mail" required>
                                 </v-text-field>
@@ -52,21 +48,20 @@
                                     counter @click:append="showPassword = !showPassword">
                                 </v-text-field>
                             </v-row>
-                            <v-row class="py-5">
-                                <v-btn :disabled="!valid" color="success" class="mr-4" @click="signUp" small>
+                            <v-row>
+                                <v-btn :disabled="!valid" color="success" class="mr-4 my-1" @click="signUp" small>
                                     Registrar
                                 </v-btn>
-                                <v-btn color="error" class="mr-4" @click="reset" small>
-                                    Borrar campos
+                                <v-btn color="error" class="mr-4 my-1" @click="reset" small>
+                                    Borrar
                                 </v-btn>
                             </v-row>
                         </v-form>
                         <!-- register -->
                     </v-card>
                 </v-col>
-                <v-col class="d-flex justify-center align-center col-sm col-md-6">
-                    <v-img class="col-sm col-md-10 rounded-xl rounded-l-0" style="height: 80%"
-                        src="https://m.media-amazon.com/images/I/61KMmAv+WhL._AC_SL1001_.jpg"></v-img>
+                <v-col class="d-flex justify-center align-center col-sm col-md-9">
+                    <fund-my-band></fund-my-band>
                 </v-col>
             </v-row>
         </v-container>
@@ -74,7 +69,7 @@
             {{ snackbarMessage }}
         </v-snackbar>
 
-        </div>
+    </div>
 </template>
 
 <script>
@@ -83,7 +78,11 @@ import {createUserWithEmailAndPassword} from 'firebase/auth'
 import auth from '../firebase/authentification'
 import {doc, setDoc, getDocs} from 'firebase/firestore'
 import userCollection from '../firebase/firestore'
+import FundMyBand from './FundMyBand.vue'
     export default {
+        components:{
+            FundMyBand
+        },
         data: () => ({
             valid: true,
             dialog: false,

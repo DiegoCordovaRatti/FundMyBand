@@ -1,10 +1,10 @@
 <template lang="">
   <div class="">
-    <v-app-bar dark class="hidden-sm-and-down" fixed>
+    <v-app-bar v-if="$store.state.signedIn === true" dark class="hidden-sm-and-down" fixed>
       <v-toolbar-title>FundMyBand</v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <v-toolbar-items v-if="$store.state.signedIn === true">
+      <v-toolbar-items>
         <v-btn to="/">
           <v-icon>
             mdi-music
@@ -23,17 +23,11 @@
           </v-icon>
           Mi cuenta
         </v-btn>
-        <v-btn v-show="false" to="/administrar">
-          <v-icon>
-            mdi-account-key
-          </v-icon>
-          Administrar
-        </v-btn>
       </v-toolbar-items>
 
       <v-spacer></v-spacer>
 
-      <v-toolbar-items v-if="$store.state.signedIn === true">
+      <v-toolbar-items>
         <v-btn @click="signOutButton()">
           <v-icon>
             mdi-account-arrow-right
@@ -41,27 +35,18 @@
           Cerrar Sesión
         </v-btn>
       </v-toolbar-items>
-
-      <v-toolbar-items v-else>
-        <v-btn to="/ingresa">
-          <v-icon>
-            mdi-account
-          </v-icon>
-          Ingresa
-        </v-btn>
-      </v-toolbar-items>
     </v-app-bar>
 
     <!--  -->
 
-    <v-app-bar dark prominent class="hidden-md-and-up" style="height: 60px">
+    <v-app-bar v-if="$store.state.signedIn === true" dark prominent class="hidden-md-and-up" style="height: 60px">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <v-title>FundMyBand</v-title>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" absolute left temporary>
       <v-list nav dense>
-        <v-list-item-group v-if="$store.state.signedIn === true" v-model="group"
+        <v-list-item-group v-model="group"
           active-class="deep-purple--text text--accent-4">
           <v-list-item to="/">
             <v-list-tile>
@@ -101,16 +86,6 @@
                 mdi-account-arrow-right
               </v-icon>
               Cerrar Sesión
-            </v-list-tile>
-          </v-list-item>
-        </v-list-item-group>
-        <v-list-item-group v-else v-model="group" active-class="deep-purple--text text--accent-4">
-          <v-list-item to="/ingresa">
-            <v-list-tile>
-              <v-icon>
-                mdi-account
-              </v-icon>
-              Ingresa
             </v-list-tile>
           </v-list-item>
         </v-list-item-group>

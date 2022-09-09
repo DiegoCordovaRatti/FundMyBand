@@ -92,6 +92,7 @@
                         </v-row>
                     </v-card-text>
                     <v-divider class="mx-4"></v-divider>
+                    
                     <v-card-title>Actividad</v-card-title>
                     <v-card-text>
                         <v-row class="justify-center">
@@ -197,10 +198,9 @@ import userCollection from '../firebase/firestore'
 export default {
     data() {
         return {
-            dialog1: false,
+            dialog: false,
             dialog2: false,
             dialog3: false,
-            dialog: false,
             currentUser: null,
             otherUsersData: null,
             items:[],
