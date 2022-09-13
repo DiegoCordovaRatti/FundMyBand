@@ -186,7 +186,7 @@
 </template>
 
 <script>
-  import auth from '../firebase/authentification'
+  import auth from '../firebase/authentication'
   import {getDocs, doc, updateDoc} from 'firebase/firestore'
   import userCollection from '../firebase/firestore'
   export default {

@@ -66,7 +66,7 @@
 <script>
   import { mapMutations } from 'vuex'
   import { signOut } from 'firebase/auth'
-  import auth from '../firebase/authentification'
+  import auth from '../firebase/authentication'
   export default {
     data() {
       return {

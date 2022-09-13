@@ -71,7 +71,7 @@
 <script>
   import { mapMutations } from 'vuex'
   import {createUserWithEmailAndPassword} from 'firebase/auth'
-  import auth from '../firebase/authentification'
+  import auth from '../firebase/authentication'
   import {doc, setDoc, getDocs} from 'firebase/firestore'
   import userCollection from '../firebase/firestore'
   import FundMyBand from './FundMyBand.vue'

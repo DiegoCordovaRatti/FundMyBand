@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import auth from '../firebase/authentification'
+import auth from '../firebase/authentication'
 import userCollection from '../firebase/firestore'
 import bandasCollection from '../firebase/bandasFirestore'
 import {doc, getDocs, updateDoc, arrayUnion, increment} from 'firebase/firestore'
