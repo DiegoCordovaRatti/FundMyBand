@@ -9,6 +9,7 @@ const Ingresa = () => import('../views/Ingresa.vue')
 
 Vue.use(VueRouter)
 
+// some routes can only be accessed by signing in
 const routes = [{
     path: '/',
     name: 'Home',
@@ -41,6 +42,7 @@ const routes = [{
       guardRoutes: true,
     }
   },
+  // default route when not signed in
   {
     path: '/ingresa',
     name: 'Ingresa',
@@ -54,12 +56,16 @@ const router = new VueRouter({
   routes
 })
 
+// 
 router.beforeEach((to, from, next) => {
-  let email = store.getters.data;
+  let userData = store.getters.data;
   let authRequired = to.matched.some((route) => route.meta.guardRoutes);
-  if (!email && authRequired) {
+  // if there is no signed in user, they will be redirected to 'Ingresa' view
+  if (!userData && authRequired) {
     next("/ingresa");
-  } else if (email && !authRequired) {
+  } 
+  // if the user is signed in, they will be redirected to 'Home' view
+  else if (userData && !authRequired) {
     next("/");
   } else {
     next();

@@ -14,10 +14,11 @@
                 @click:append="showPassword = !showPassword">
               </v-text-field>
               <v-row class="my-5">
+                <!-- if the form is correct, it will then redirect the user to the full website -->
                 <v-btn :disabled="!valid" color="success" class="mr-4" @click="signIn" small>
                   Ingresar
                 </v-btn>
-                <v-btn color="error" class="mr-4" @click="reset" small>
+                <v-btn color="error" class="mr-4" @click="clearForm" small>
                   Borrar campos
                 </v-btn>
               </v-row>
@@ -30,6 +31,8 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <!-- displays a message if the user is signed in -->
     <v-snackbar v-model="snackbar">
       {{ snackbarMessage }}
     </v-snackbar>
@@ -57,6 +60,7 @@
       password: '',
       snackbarMessage: null,
       showPassword: false,
+      // rules of the form
       rules: {
         required: value => !!value || 'Esta area es requerida.',
         min: v => v.length >= 8 || 'Ingresa 8 caracteres como minimo',
@@ -72,11 +76,13 @@
       validate() {
         this.$refs.form.validate()
       },
-      reset() {
+      clearForm() {
         this.$refs.form.reset()
       },
       ...mapMutations(['SIGNED_IN']),
+      // checks if the email and password are correct. Then, it signs in the user.
       async signIn() {
+        // tries to sign in the user. If it fails, it catches the error.
         try {
           await signInWithEmailAndPassword(auth, this.email, this.password)
           this.snackbarMessage = `Bienvenido, ${this.email}`
@@ -90,15 +96,18 @@
             }
             usersData.push(doc.data())
           });
+          // data to be saved in the store
           this.payload.data = auth.currentUser
           this.payload.currentUserData = currentUserData
           this.payload.usersData = usersData
           this.payload.currentUserID = auth.currentUser.uid
+          // redirects the user to the full website
           let pushRoute = () => {
             this.$router.push("/")
           }
           setTimeout(pushRoute, 500)
           this.$store.commit('SIGNED_IN', this.payload)
+          // catches the error if the sign in process fails
         } catch (error) {
           if (error.code == "auth/user-not-found") {
             this.snackbarMessage = `Usuario invalido, intente con otro.`

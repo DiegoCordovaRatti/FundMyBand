@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Renders BandCards component -->
     <band-cards></band-cards>
   </div>
 </template>

@@ -1,25 +1,29 @@
 <template>
-  <v-container class="mt-md-15" style="">
+  <v-container class="mt-md-15">
     <v-row>
       <v-col>
+        <!-- Cards are filtered by the textfield value  -->
         <v-text-field filled dark v-model="select" class="mx-4" flat label="¿Buscas una banda en especifico?">
         </v-text-field>
       </v-col>
     </v-row>
     <v-row class="d-flex justify-center align-center" style="min-height: 80vh">
+      <!-- Renders cards depending on the value of the textfield  -->
       <v-col v-for="(card, i) in searchBand" :key="i" class="col-sm col-md-6 col-lg-4">
         <v-card class="bandCard">
+          <!-- Redirects the user to a certain band view  -->
           <v-card :to="`/banda/${card.index}/${card.view}`" style="height: 85%">
             <v-img :src="card.imgSrc" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-              height="200px">
-              <v-card-title v-text="card.title"></v-card-title>
-            </v-img>
-            <v-card-text class="d-flex align-center" style="height: 150px">
-              <div>{{card.text}}</div>
-            </v-card-text>
-          </v-card>
-          <v-card-actions class="justify-center" style="height: 15%">
-            <v-btn icon>
+            height="200px">
+            <v-card-title v-text="card.title"></v-card-title>
+          </v-img>
+          <v-card-text class="d-flex align-center" style="height: 150px">
+            <div>{{card.text}}</div>
+          </v-card-text>
+        </v-card>
+        <v-card-actions class="justify-center" style="height: 15%">
+          <v-btn icon>
+            <!-- alternates between icons and adds or removes the liked band from the database  -->
               <v-icon class="growIcon" @click="removeLike(card.index, card)" v-if="card.likedBand"
                 style="color: #e31b23">mdi-robot-love</v-icon>
               <v-icon class="normalIcon" @click="addLike(card)" v-else>mdi-robot-confused-outline</v-icon>
@@ -45,32 +49,37 @@ import {doc, getDocs, updateDoc, arrayUnion, increment} from 'firebase/firestore
       comparedBands: null
     }),
     methods: {
+      // gets the user's liked bands from the database 
       async bandLiked() {
         const querySnapshot = await getDocs(userCollection)
-        let bandsLiked = []
+        let likedBands = []
         let bandArray = null
+        // gets an array with the titles of the user's liked bands
         querySnapshot.docs.forEach(doc => {
           if (doc.id == auth.currentUser.uid) {
             bandArray = doc.data().likes
             bandArray.forEach(band => {
-              bandsLiked.push(band.title)
+              likedBands.push(band.title)
             })
           }
         });
-        let newArray = []
-        bandsLiked.forEach((bandliked) => {
+        let likedBandsArray = []
+        /* looks for bands that include the same title. Then, activates 
+        the liked button and reloads it for each sesssion */
+        likedBands.forEach((likedBand) => {
           let likesFilter = this.cards.filter(band => {
-            return band.title.includes(bandliked)
+            return band.title.includes(likedBand)
           })
           this.cards.forEach(card => {
             if (likesFilter[0].title == card.title) {
               card.likedBand = true
             }
           })
-          newArray.push(likesFilter[0])
+          likedBandsArray.push(likesFilter[0])
         })
       },
 
+      // adds a liked band to the user's database and activates the liked button
       async addLike(card) {
         card.likedBand = true
         let currentUserID = this.$store.state.currentUserID
@@ -82,26 +91,29 @@ import {doc, getDocs, updateDoc, arrayUnion, increment} from 'firebase/firestore
           likes: increment(1)
         })
       },
-
+      
+      // removes a liked band to the user's database and deactivates the liked button
       async removeLike(iterator, card) {
-        card.likedBand = false
-        let likesCount = null
         const querySnapshot = await getDocs(userCollection)
-        let likedBands = null
+        let likesCount = null
+        let newLikedBands = null
+        card.likedBand = false
+        // makes an array out of the values from the database and removes that band
         querySnapshot.docs.forEach(doc => {
           if (doc.id == auth.currentUser.uid) {
-            likedBands = doc.data().likes
-            likedBands.forEach((band, index) => {
+            newLikedBands = doc.data().likes
+            newLikedBands.forEach((band, index) => {
               if (band.index == iterator) {
-                likedBands.splice(index, 1)
+                newLikedBands.splice(index, 1)
               }
             })
           }
         });
         let currentUserID = this.$store.state.currentUserID
         const likesRef = doc(userCollection, currentUserID)
+        // updates the database with the value of newLikedBands array 
         await updateDoc(likesRef, {
-          likes: likedBands
+          likes: newLikedBands
         })
         const bandsSnapshot = await getDocs(bandasCollection)
         bandsSnapshot.docs.forEach(bandDoc => {
@@ -109,6 +121,7 @@ import {doc, getDocs, updateDoc, arrayUnion, increment} from 'firebase/firestore
             likesCount = bandDoc.data().likes
           }
         })
+        // decreases the number of likes that band has
         if (likesCount > 0) {
           await updateDoc(doc(bandasCollection, card.title), {
             likes: increment(-1)
@@ -120,6 +133,7 @@ import {doc, getDocs, updateDoc, arrayUnion, increment} from 'firebase/firestore
       getBandas() {
         return this.$store.state.bandas
       },
+      // filters the cards through a textfield
       searchBand() {
         return this.cards.filter(band => {
           return band.title.toLowerCase().includes(this.select.toLowerCase())
@@ -128,6 +142,7 @@ import {doc, getDocs, updateDoc, arrayUnion, increment} from 'firebase/firestore
     },
     created() {
       this.cards = this.getBandas
+      // gets every band liked by the user and renders and liked buttons
       this.bandLiked()
     },
 

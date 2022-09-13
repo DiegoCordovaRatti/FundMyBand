@@ -41,8 +41,10 @@ import bandasCollection from './firebase/bandasFirestore'
     font-family: 'Josefin Sans', sans-serif;
   }
   #app, #signIn, #signUp{
-    background: url('https://static.vecteezy.com/system/resources/previews/000/258/929/large_2x/vector-beautiful-dark-green-texture-background.jpg');
+    /* background: url('https://static.vecteezy.com/system/resources/previews/000/258/929/large_2x/vector-beautiful-dark-green-texture-background.jpg'); */
+    background: url('./assets/concert.jpg');
     background-size: cover;
+    background-position: center;
     height: auto;
     background-attachment: fixed;
     color: white

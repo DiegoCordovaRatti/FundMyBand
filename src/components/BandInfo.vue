@@ -3,6 +3,7 @@
     <v-row class="mb-5">
       <v-img class="d-flex align-end" :src="band.bannerSrc" aspect-ratio="2.5" fluid>
         <div class="ma-8 d-flex align-center" fluid>
+          <!-- shows how many likes the band has got -->
           <v-icon style="color: #e31b23" x-large>mdi-robot-love</v-icon>
           <span class="ms-3 text-h5" style="color:white">{{ likesQuantity }} Likes</span>
         </div>
@@ -15,11 +16,13 @@
       </v-row>
       <v-row class="my-5">
         <div class="col-sm col-md-6 d-flex justify-center" style="padding: 0">
+          <!-- renders a spotify iframe with certain band's album -->
           <iframe style="border-radius:12px" :src="band.spotifyUrl" width="80%" height="100%" frameBorder="0"
             allowfullscreen=""
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
         </div>
         <div class="col-sm col-md-6">
+          <!-- renders a band's summary -->
           <v-row class="d-flex justify-center">
             <img :src="band.imgSrc" width="80%">
           </v-row>
@@ -31,6 +34,7 @@
     </div>
 
     <v-row class="d-flex justify-center mb-10" style="transform: scale(1.5)">
+      <!-- renders a button connected to paypal  -->
       <form action="https://www.paypal.com/donate" method="post" target="_blank">
         <input type="hidden" name="hosted_button_id" value="7UCNHKMB8L85S" />
         <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit"

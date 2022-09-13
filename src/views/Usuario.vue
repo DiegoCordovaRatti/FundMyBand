@@ -1,5 +1,6 @@
 <template lang="">
   <div>
+    <!-- Renders UserAccount component -->
     <user-account></user-account>
   </div>
 </template>

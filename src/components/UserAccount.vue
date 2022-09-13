@@ -203,32 +203,13 @@
       }
     },
     methods: {
+      // gets the user's name and last name and extracts the initials
       initials(element) {
         let splitElement = element.split('')
         let firstLetter = splitElement[0]
         return firstLetter
       },
-
-      async removeLike(iterator) {
-        const querySnapshot = await getDocs(userCollection)
-        let likedBands = null
-        querySnapshot.docs.forEach(doc => {
-          if (doc.id == auth.currentUser.uid) {
-            likedBands = doc.data().likes
-            likedBands.forEach((band, index) => {
-              if (band.index == iterator) {
-                likedBands.splice(index, 1)
-              }
-            })
-          }
-        });
-        let currentUserID = this.$store.state.currentUserID
-        const likesRef = doc(userCollection, currentUserID)
-        await updateDoc(likesRef, {
-          likes: likedBands
-        })
-      },
-
+      
       async updateBanner(newBanner) {
         this.newBanner = newBanner
         await updateDoc(doc(userCollection, auth.currentUser.uid), {

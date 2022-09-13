@@ -1,6 +1,6 @@
 <template lang="">
   <div>
-    <band-info></band-info>
+    <band-info></band-info> <!-- imports BandInfo Component -->
   </div>
 </template>
 

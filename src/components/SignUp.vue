@@ -45,10 +45,11 @@
                   </v-text-field>
                 </v-row>
                 <v-row>
-                  <v-btn :disabled="!valid" color="success" class="mr-4 my-1" @click="signUp" small>
+                <!-- if the form is correct, it will then redirect the user to the full website -->
+                <v-btn :disabled="!valid" color="success" class="mr-4 my-1" @click="signUp" small>
                     Registrar
                   </v-btn>
-                  <v-btn color="error" class="mr-4 my-1" @click="reset" small>
+                  <v-btn color="error" class="mr-4 my-1" @click="clearForm" small>
                     Borrar
                   </v-btn>
                 </v-row>
@@ -111,17 +112,20 @@
     }),
 
     methods: {
-      reset() {
+      clearForm() {
         this.$refs.form.reset()
       },
       ...mapMutations(['SIGNED_IN']),
       async signUp() {
+        // tries to sign up the user. If it fails, it catches the error.
         try {
           this.$refs.form.validate()
+          // creates a new user in the database with their mail and password
           await createUserWithEmailAndPassword(auth, this.email, this.password)
           this.snackbarMessage = `Su cuenta ha sido creada exitosamente, ${this.userName}`
           let user = auth.currentUser
           this.payload.currentUserID = auth.currentUser.uid
+          // add the user's information to the database
           await setDoc(doc(userCollection, user.uid), {
             firstName: this.firstName,
             lastName: this.lastName,
@@ -144,11 +148,14 @@
             }
             usersData.push(doc.data())
           });
+          // data to be saved in the store
           this.payload.data = auth.currentUser
           this.payload.currentUserData = currentUserData
           this.payload.usersData = usersData
           this.$store.commit('SIGNED_IN', this.payload)
+          // redirects the user to the full website
           this.$router.push("/")
+          // catches the error if the sign up process fails
         } catch (error) {
           if (error.code == "auth/email-already-in-use") {
             this.snackbarMessage = `El email ya está en uso, intente con otro.`

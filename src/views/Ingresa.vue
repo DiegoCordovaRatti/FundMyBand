@@ -1,5 +1,6 @@
 <template>
   <v-card>
+    <!-- v-tabs renders either SignIn or SignUp components when clicked  -->
     <v-tabs v-model="tab" centered dark icons-and-text>
       <v-tabs-slider></v-tabs-slider>
       <v-tab href="#resgistrate">
@@ -13,11 +14,13 @@
       <v-tabs-items v-model="tab">
         <v-tab-item value="resgistrate">
           <v-card flat>
+            <!-- Renders SignUp component -->
             <sign-up></sign-up>
           </v-card>
         </v-tab-item>
         <v-tab-item value="ingresa">
           <v-card flat>
+            <!-- Renders SignIn component -->
             <sign-in></sign-in>
           </v-card>
         </v-tab-item>

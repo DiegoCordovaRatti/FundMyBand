@@ -3,7 +3,7 @@
     <v-card v-if="currentUserData.likes.length > 0" class="d-flex flex-column py-10 bands-card"
       style="min-height: 80vh">
       <v-card-title class="mx-auto text-h4 mb-10">
-        <strong>Vuelve a escuchar las bandas que más te han gustado</strong>
+        <strong class="liked-bands-title">Vuelve a escuchar las bandas que más te han gustado</strong>
       </v-card-title>
       <v-row class="mx-3 d-flex justify-center">
         <v-card class="col-sm col-md-4 col-lg-3 ma-3 band-card d-flex justify-center align-center"
@@ -63,7 +63,10 @@
 </script>
 <style scoped>
 .bands-card{
-  background:url('https://cdn.pixabay.com/photo/2019/07/16/08/10/white-4341307_1280.jpg');
+  background: transparent;
+}
+.liked-bands-title{
+  color: white;
 }
 .band-card{
   border: 0.5px solid rgb(145, 138, 138);
