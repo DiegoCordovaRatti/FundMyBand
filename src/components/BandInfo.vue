@@ -51,7 +51,6 @@
           <v-row class="justify-center">
             <v-col v-for="(bandMember, i) in bandMembers" :key="i" class="col-sm col-md-6 col-lg-4">
               <v-card class="member-card">
-                <v-img height="300px" :src="bandMember.photo"></v-img>
                 <v-card-text>
                   <v-timeline align-top dense>
                     <v-timeline-item color="black" small>

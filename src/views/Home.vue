@@ -4,9 +4,9 @@
       <!-- Renders Carousel component -->
       <carousel></carousel>
     </v-row>
-    <v-row class="d-flex justify-center align-center text-center mb-10" style="min-height: 80vh">
+    <v-row class="d-flex justify-center align-center text-center my-10" style="min-height: 80vh;">
       <!-- renders FundMyBand component & renders FavBands component through a boolean type prop -->
-      <fund-my-band :showFavBands="true"></fund-my-band>
+      <fund-my-band style="width: 80vw" :showFavBands="true"></fund-my-band>
     </v-row>
     <v-row>
       <v-col>
@@ -30,9 +30,3 @@
     },
   }
 </script>
-
-<style scoped>
-  .bands-card{
-    background:url('https://cdn.pixabay.com/photo/2019/07/16/08/10/white-4341307_1280.jpg');
-  }
-</style>

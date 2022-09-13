@@ -93,7 +93,7 @@
         <v-card-title>Actividad</v-card-title>
         <v-card-text>
           <v-row class="justify-center">
-            <v-btn-toggle v-model="toggle_multiple" dense background-color="primary" dark multiple>
+            <v-btn-toggle class="my-5" v-model="toggle_multiple" dense background-color="primary" dark multiple>
               <v-btn color="primary" dark @click.stop="dialog = true">Me gusta
               </v-btn>
               <v-dialog v-model="dialog">
