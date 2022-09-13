@@ -1,17 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import auth from '../firebase/authentification'
 import store from '../store/index'
 const Home = () => import('../views/Home.vue')
 const ListaBandas = () => import('../views/ListaBandas.vue')
 const Banda = () => import('../views/Banda.vue')
 const Usuario = () => import('../views/Usuario.vue')
 const Ingresa = () => import('../views/Ingresa.vue')
-const Administrar = () => import('../views/Administrar.vue')
 
 
 Vue.use(VueRouter)
-
 const routes = [
   {
     path: '/',
@@ -50,16 +47,6 @@ const routes = [
     name: 'Ingresa',
     component: Ingresa
   },
-  {
-    path: '/administrar',
-    name: 'Administrar',
-    component: Administrar,
-    meta:{
-      guardRoutes: true,
-    }
-  },
-
-
 ]
 
 const router = new VueRouter({
