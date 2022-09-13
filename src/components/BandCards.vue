@@ -6,7 +6,6 @@
         </v-text-field>
       </v-col>
     </v-row>
-
     <v-row class="d-flex justify-center align-center" style="min-height: 80vh">
       <v-col v-for="(card, i) in searchBand" :key="i" class="col-sm col-md-6 col-lg-4">
         <v-card class="bandCard">
@@ -15,12 +14,10 @@
               height="200px">
               <v-card-title v-text="card.title"></v-card-title>
             </v-img>
-
             <v-card-text class="d-flex align-center" style="height: 150px">
               <div>{{card.text}}</div>
             </v-card-text>
           </v-card>
-
           <v-card-actions class="justify-center" style="height: 15%">
             <v-btn icon>
               <v-icon class="growIcon" @click="removeLike(card.index, card)" v-if="card.likedBand"

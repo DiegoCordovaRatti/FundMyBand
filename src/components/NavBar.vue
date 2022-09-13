@@ -3,30 +3,15 @@
     <v-app-bar v-if="$store.state.signedIn === true" dark class="hidden-sm-and-down" fixed>
       <v-toolbar-title>FundMyBand</v-toolbar-title>
       <v-spacer></v-spacer>
-
-      <v-toolbar-items>
-        <v-btn to="/">
+      <v-toolbar-items v-for="(view, i) in views" :key="i">
+        <v-btn :to="view.route">
           <v-icon>
-            mdi-music
+            {{ view.icon }}
           </v-icon>
-          Inicio
-        </v-btn>
-        <v-btn to="/lista-bandas">
-          <v-icon>
-            mdi-guitar-electric
-          </v-icon>
-          Bandas
-        </v-btn>
-        <v-btn :to='`/mi-cuenta/${$store.state.currentUserID}`'>
-          <v-icon>
-            mdi-account
-          </v-icon>
-          Mi cuenta
+          {{ view.name }}
         </v-btn>
       </v-toolbar-items>
-
       <v-spacer></v-spacer>
-
       <v-toolbar-items>
         <v-btn @click="signOutButton()">
           <v-icon>
@@ -38,7 +23,6 @@
     </v-app-bar>
 
     <!--  -->
-
     <v-app-bar v-if="$store.state.signedIn === true" dark prominent class="hidden-md-and-up" style="height: 60px">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
@@ -46,40 +30,18 @@
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" absolute left temporary>
       <v-list nav dense>
-        <v-list-item-group v-model="group"
+        <v-list-item-group v-for="(view, i) in views" :key="i" v-model="group"
           active-class="deep-purple--text text--accent-4">
-          <v-list-item to="/">
+          <v-list-item :to="view.route">
             <v-list-tile>
               <v-icon>
-                mdi-music
+                {{ view.icon }}
               </v-icon>
-              Inicio
+              {{ view.name }}
             </v-list-tile>
           </v-list-item>
-          <v-list-item to="/lista-bandas">
-            <v-list-tile>
-              <v-icon>
-                mdi-guitar-electric
-              </v-icon>
-              Bandas
-            </v-list-tile>
-          </v-list-item>
-          <v-list-item :to='`/mi-cuenta/${$store.state.currentUserID}`'>
-            <v-list-tile>
-              <v-icon>
-                mdi-account
-              </v-icon>
-              Mi cuenta
-            </v-list-tile>
-          </v-list-item>
-          <v-list-item v-show="false" to="/administrar">
-            <v-list-tile>
-              <v-icon>
-                mdi-account-key
-              </v-icon>
-              Administrar
-            </v-list-tile>
-          </v-list-item>
+        </v-list-item-group>
+        <v-list-item-group>
           <v-list-item @click="signOutButton()" class="mt-15">
             <v-list-tile>
               <v-icon>
@@ -92,29 +54,45 @@
       </v-list>
     </v-navigation-drawer>
 
-
     <v-snackbar v-model="snackbar">
       Su sesión ha sido cerrada correctamente.
     </v-snackbar>
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex'
-import { signOut } from 'firebase/auth'
-import auth from '../firebase/authentification'
-export default {
+  import { mapMutations } from 'vuex'
+  import { signOut } from 'firebase/auth'
+  import auth from '../firebase/authentification'
+  export default {
     data() {
-        return {
-            dialog: false,
-            snackbar: false,
-            signedIn: null,
-            currentUserId: null,
-            drawer: false,
-            group: null,
-        }
+      return {
+        views:[
+          {
+            route:'/',
+            icon:'mdi-music',
+            name:'Inicio',
+          },
+          {
+            route:'/lista-bandas',
+            icon:'mdi-guitar-electric',
+            name:'Bandas',
+          },
+          {
+            route:`/mi-cuenta/${this.$store.state.currentUserID}`,
+            icon:'mdi-account',
+            name:'Mi cuenta',
+          },
+        ],
+        dialog: false,
+        snackbar: false,
+        signedIn: null,
+        currentUserId: null,
+        drawer: false,
+        group: null,
+      }
     },
     watch: {
-      group () {
+      group() {
         this.drawer = false
       },
     },
@@ -133,14 +111,14 @@ export default {
       }
     },
     computed: {
-        modifyNavbar() {
-            return this.$store.state.signedIn
-        },
+      modifyNavbar() {
+        return this.$store.state.signedIn
       },
-      created() {
-          this.signedIn = this.modifyNavbar
-      },
-}
+    },
+    created() {
+      this.signedIn = this.modifyNavbar
+    },
+  }
 </script>
 <style lang="">
     

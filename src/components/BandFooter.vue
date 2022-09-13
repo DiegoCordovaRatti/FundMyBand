@@ -9,13 +9,9 @@
               </v-icon>
             </v-btn>
           </v-card-text>
-
           <v-card-text class="white--text pt-0" style="width:100vw">
-            
           </v-card-text>
-
           <v-divider></v-divider>
-
           <v-card-text class="white--text">
             {{ new Date().getFullYear() }} — <strong>FundMyBand</strong>
           </v-card-text>
@@ -24,19 +20,16 @@
     </div>
 </template>
 <script>
-export default {
+  export default {
     data() {
-        return {
-            icons: [
-                'mdi-facebook',
-                'mdi-twitter',
-                'mdi-linkedin',
-                'mdi-instagram',
-            ],
-        }
+      return {
+        icons: [
+          'mdi-facebook',
+          'mdi-twitter',
+          'mdi-linkedin',
+          'mdi-instagram',
+        ],
+      }
     },
-}
+  }
 </script>
-<style lang="">
-    
-</style>

@@ -7,14 +7,13 @@ const Banda = () => import('../views/Banda.vue')
 const Usuario = () => import('../views/Usuario.vue')
 const Ingresa = () => import('../views/Ingresa.vue')
 
-
 Vue.use(VueRouter)
-const routes = [
-  {
+
+const routes = [{
     path: '/',
     name: 'Home',
     component: Home,
-    meta:{
+    meta: {
       guardRoutes: true,
     }
   },
@@ -22,7 +21,7 @@ const routes = [
     path: '/lista-bandas',
     name: 'ListaBandas',
     component: ListaBandas,
-    meta:{
+    meta: {
       guardRoutes: true,
     }
   },
@@ -30,7 +29,7 @@ const routes = [
     path: '/banda/:id/:thisbanda',
     name: 'Banda',
     component: Banda,
-    meta:{
+    meta: {
       guardRoutes: true,
     }
   },
@@ -38,7 +37,7 @@ const routes = [
     path: '/mi-cuenta/:usuario',
     name: 'Usuario',
     component: Usuario,
-    meta:{
+    meta: {
       guardRoutes: true,
     }
   },
@@ -56,7 +55,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  let email = store.getters.data; 
+  let email = store.getters.data;
   let authRequired = to.matched.some((route) => route.meta.guardRoutes);
   if (!email && authRequired) {
     next("/ingresa");

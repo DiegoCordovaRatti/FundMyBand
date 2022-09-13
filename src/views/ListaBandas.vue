@@ -5,13 +5,10 @@
 </template>
 
 <script>
-import BandCards from '../components/BandCards.vue';
-export default {
-  components: { 
-    BandCards 
-  },
-}
+  import BandCards from '../components/BandCards.vue';
+  export default {
+    components: {
+      BandCards
+    },
+  }
 </script>
-<style lang="">
-  
-</style>
