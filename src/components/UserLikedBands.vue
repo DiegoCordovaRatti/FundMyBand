@@ -37,7 +37,7 @@
   </div>
 </template>
 <script>
-  import auth from '../firebase/authentication'
+  import {auth} from '../firebase/authentication'
   import { getDocs } from 'firebase/firestore'
   import userCollection from '../firebase/firestore'
   export default {

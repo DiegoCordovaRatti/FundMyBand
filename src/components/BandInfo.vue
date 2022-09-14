@@ -120,7 +120,7 @@
 </template>
 
 <script>
-  import auth from '../firebase/authentication'
+  import {auth} from '../firebase/authentication'
   import {arrayUnion, doc, updateDoc, getDocs} from 'firebase/firestore'
   import bandasCollection from '../firebase/bandasFirestore'
   import userCollection from '../firebase/firestore'
